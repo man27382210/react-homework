@@ -20,13 +20,14 @@
   "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
   "scripts": {
     "test": "",
-    "start": "node server",
+    "dev": "node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
     "jscs": "jscs ."
   },
   "dependencies": {
     "babel-cli": "^6.4.0",
+    "materialize-css": "^0.98.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },

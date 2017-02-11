@@ -1,5 +1,4 @@
 /* eslint no-console: 0 */
-
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -27,6 +26,7 @@ if (isDeveloping) {
   });
 
   app.use(middleware);
+  app.use(express.static(path.join(__dirname, 'app')));
   app.use(webpackHotMiddleware(compiler));
   app.get('*', function response(req, res) {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
