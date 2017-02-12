@@ -26,9 +26,22 @@ class CreateForm extends React.Component {
       priority: Constant.PRIORITY_DEFAULT,
     });
   }
-  onSubmit(event) {
+  checkValueExist(DOMValues) {
     let valueColumnName;
 
+    // check existance of each column
+    const emptyValueExist = Object.keys(DOMValues).every((key) => {
+      const result = DOMValues[key] ? true : false;
+      if (!result) valueColumnName = key;
+      return result;
+    });
+    // if some column is empty
+    if (valueColumnName) {
+      console.log(`column '${valueColumnName}' is empty`);
+    }
+    return emptyValueExist;
+  }
+  onSubmit(event) {
     // prevent default form action
     event.preventDefault();
 
@@ -41,19 +54,10 @@ class CreateForm extends React.Component {
       priority: document.getElementById('create-form-priority').value,
     };
 
-    // check existance of each column
-    const emptyValueExist = Object.keys(opt).every((key) => {
-      const result = opt[key] ? true : false;
-      if (!result) valueColumnName = key;
-      return result;
-    });
-
     // send action to create new form element
-    if (emptyValueExist) {
+    if (this.checkValueExist(opt)) {
       this.props.onCreateFormSubmit(opt);
       this.resetForm();
-    } else {
-      console.log(`column '${valueColumnName}' is empty`);
     }
   }
   onFormChange(event) {
