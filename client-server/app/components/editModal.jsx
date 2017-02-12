@@ -8,6 +8,8 @@ class EditModal extends React.Component {
   constructor(props) {
     super(props);
     this.onFormChange = this.onFormChange.bind(this);
+    this.onEditSubmit = this.onEditSubmit.bind(this);
+    this.resetForm = this.resetForm.bind(this);
     this.state = {
       ...this.props.modalDisplay
     };
@@ -17,6 +19,42 @@ class EditModal extends React.Component {
     this.setState({
       ...nextProps.modalDisplay
     });
+  }
+  resetForm() {
+    this.props.onElementItemEdit({
+      owner: Constant.OWNER_DEFAULT,
+      title: Constant.TITLE_DEFAULT,
+      category: Constant.CATEGORY_DEFAULT,
+      status: Constant.STATUS_DEFAULT,
+      priority: Constant.PRIORITY_DEFAULT,
+    });
+  }
+  checkValueExist(DOMValues) {
+    let valueColumnName;
+
+    // check existance of each column
+    const emptyValueExist = Object.keys(DOMValues).every((key) => {
+      const result = DOMValues[key] ? true : false;
+      if (!result) valueColumnName = key;
+      return result;
+    });
+    // if some column is empty
+    if (valueColumnName) {
+      console.log(`column '${valueColumnName}' is empty`);
+    }
+    return emptyValueExist;
+  }
+  onEditSubmit() {
+    const fieldValue = {...this.state};
+
+    // do not validate attribute of 'index'
+    delete fieldValue.index;
+
+    // send action to create new form element
+    if (this.checkValueExist(fieldValue)) {
+      this.props.onModalEdit(this.state);
+      this.resetForm();
+    }
   }
   onFormChange(event) {
     if (this.state.hasOwnProperty(event.target.name)) {
@@ -117,7 +155,7 @@ class EditModal extends React.Component {
           <div className="modal-footer" style={style}>
             <button
               className="modal-action modal-close btn waves-effect waves-light indigo"
-              onClick={this.props.onModalEdit}
+              onClick={this.onEditSubmit}
             >
               Edit
               <i className="material-icons right">mode_edit</i>

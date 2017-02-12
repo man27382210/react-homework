@@ -28,11 +28,12 @@ class ElementList extends Component {
 
           <tbody >
             {
-              this.props.elementList.map((element, i )=> {
-                element.sequenceNumber = i + 1;
+              this.props.elementList.map((element, index )=> {
+                element.sequenceNumber = index + 1;
                 return (
                   <ElementListItem
-                    key= {'ElementListItem' + i}
+                    key= {'ElementListItem' + index}
+                    index= {index}
                     element = {element}
                   />);
               })
