@@ -4,21 +4,18 @@ import { onElementItemEdit } from '../actions/';
 
 class ElementListItem extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.onEditBtnClick = this.onEditBtnClick.bind(this);
     this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);
-    this.state = {
-      ...props.element
-    };
   }
-
   onEditBtnClick() {
     // console.log(`onEditBtnClick and element = \n${JSON.stringify(this.state)}`);
     // set state of modalDisplay
-    this.props.onElementItemEdit({...this.state});
+    console.log(`index =${this.props.index}`);
+    this.props.onElementItemEdit({...this.props.element, index: this.props.index});
   }
   onDeleteBtnClick() {
-    console.log(`onDeleteBtnClick = \n${JSON.stringify(this.state)}`);
+    console.log(`onDeleteBtnClick = \n${JSON.stringify(this.props.element)}`);
   }
   render() {
     const style = {
@@ -26,12 +23,12 @@ class ElementListItem extends Component {
     };
     return (
       <tr>
-        <td>{ this.state.sequenceNumber }</td>
-        <td>{ this.state.status }</td>
-        <td>{ this.state.category }</td>
-        <td>{ this.state.title }</td>
-        <td>{ this.state.owner }</td>
-        <td>{ this.state.priority }</td>
+        <td>{ this.props.element.sequenceNumber }</td>
+        <td>{ this.props.element.status }</td>
+        <td>{ this.props.element.category }</td>
+        <td>{ this.props.element.title }</td>
+        <td>{ this.props.element.owner }</td>
+        <td>{ this.props.element.priority }</td>
         <td>
           <a
             href="#edit-modal"
@@ -53,7 +50,8 @@ class ElementListItem extends Component {
   }
 }
 ElementListItem.PropTypes = {
-  element: PropTypes.object,
+  element: PropTypes.object.isRequired,
+  index: PropTypes.number,
   onElementItemEdit: PropTypes.func,
 };
 
