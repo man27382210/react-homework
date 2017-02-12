@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Input } from 'react-materialize';
 import { onModalEdit, onElementItemEdit } from  '../actions/';
 import Constant from '../common/constant';
 
@@ -76,38 +77,41 @@ class EditModal extends React.Component {
             </div>
 
             <div className="row">
-              <div className="input-field col s3">
-                <select
+              <div>
+                <Input
                   id="edit-modal-status"
+                  s={3}
+                  type="select"
+                  label="status"
+                  name="status"
                   onChange={this.onFormChange}
                   value={this.state.status}
-                  name="status"
                 >
                   <option value={Constant.STATUS_DEFAULT} disabled>Choose your status</option>
                   <option value={Constant.STATUS_OPEN}>open</option>
                   <option value={Constant.STATUS_PENDING}>pending</option>
                   <option value={Constant.STATUS_PROCESSING}>processing</option>
                   <option value={Constant.STATUS_CLOSED}>closed</option>
-                </select>
-                <label>Status </label>
+                </Input>
               </div>
 
-              <div className="input-field col s3">
-                <select
+              <div>
+                <Input
                   id="edit-modal-priorty"
+                  s={3}
+                  type="select"
+                  label="priority"
+                  name="priority"
                   onChange={this.onFormChange}
                   value={this.state.priority}
-                  name="priority"
                 >
                   <option value={Constant.PRIORITY_DEFAULT} disabled>Choose your priority</option>
                   <option value={Constant.PRIORITY_EMERGENCY}>Emergency</option>
                   <option value={Constant.PRIORITY_IMPORTANT}>important</option>
                   <option value={Constant.PRIORITY_NORAML}>normal</option>
                   <option value={Constant.PRIORITY_NOTHING}>nothing</option>
-                </select>
-                <label>Priority </label>
+                </Input>
               </div>
-
             </div>
           </div>
           <div className="modal-footer" style={style}>
