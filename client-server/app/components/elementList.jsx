@@ -44,8 +44,8 @@ class ElementList extends Component {
     );
   }
 }
-ElementList.PropTypes = {
-  elementList: PropTypes.object
+ElementList.propTypes = {
+  elementList: PropTypes.array
 };
 function mapStateToProps(state) {
   return {

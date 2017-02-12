@@ -158,7 +158,7 @@ class CreateForm extends React.Component {
     );
   }
 }
-CreateForm.PropTypes = {
+CreateForm.propTypes = {
   onCreateFormSubmit: PropTypes.func
 };
 

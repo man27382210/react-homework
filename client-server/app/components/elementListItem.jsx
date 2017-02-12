@@ -49,7 +49,7 @@ class ElementListItem extends Component {
     );
   }
 }
-ElementListItem.PropTypes = {
+ElementListItem.propTypes = {
   element: PropTypes.object.isRequired,
   index: PropTypes.number,
   onElementItemEdit: PropTypes.func,
