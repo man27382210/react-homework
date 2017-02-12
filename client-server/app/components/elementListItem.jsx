@@ -1,23 +1,21 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { onElementItemEdit } from '../actions/';
 
-export default class ElementListItem extends Component {
+class ElementListItem extends Component {
   constructor(props) {
     super();
     this.onEditBtnClick = this.onEditBtnClick.bind(this);
     this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);
     this.state = {
-      sequenceNumber: props.element.sequenceNumber,
-      status: props.element.status,
-      categoryName: props.element.categoryName,
-      title: props.element.title,
-      owner: props.element.owner,
-      priority: props.element.priority,
+      ...props.element
     };
   }
 
   onEditBtnClick() {
-    console.log(`onEditBtnClick and element = \n${JSON.stringify(this.state)}`);
+    // console.log(`onEditBtnClick and element = \n${JSON.stringify(this.state)}`);
     // set state of modalDisplay
+    this.props.onElementItemEdit({...this.state});
   }
   onDeleteBtnClick() {
     console.log(`onDeleteBtnClick = \n${JSON.stringify(this.state)}`);
@@ -30,7 +28,7 @@ export default class ElementListItem extends Component {
       <tr>
         <td>{ this.state.sequenceNumber }</td>
         <td>{ this.state.status }</td>
-        <td>{ this.state.categoryName }</td>
+        <td>{ this.state.category }</td>
         <td>{ this.state.title }</td>
         <td>{ this.state.owner }</td>
         <td>{ this.state.priority }</td>
@@ -54,3 +52,9 @@ export default class ElementListItem extends Component {
     );
   }
 }
+ElementListItem.PropTypes = {
+  element: PropTypes.object,
+  onElementItemEdit: PropTypes.func,
+};
+
+export default connect(null, {onElementItemEdit})(ElementListItem);
