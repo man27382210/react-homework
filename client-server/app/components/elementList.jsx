@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import ElementListItem from './elementListItem.jsx';
 
-export default class ElementList extends Component {
+class ElementList extends Component {
   constructor() {
     super();
   }
@@ -27,18 +28,12 @@ export default class ElementList extends Component {
 
           <tbody >
             {
-              Array.apply(null, new Array(5)).map((v, i)=>{
+              this.props.elementList.map((element, i )=> {
+                element.sequenceNumber = i + 1;
                 return (
                   <ElementListItem
                     key= {'ElementListItem' + i}
-                    element = {{
-                      sequenceNumber: i + 1,
-                      categoryName: 'cat1',
-                      title: 'title',
-                      owner: 'Nick',
-                      status: 'open',
-                      priority: 'emergency',
-                    }}
+                    element = {element}
                   />);
               })
             }
@@ -48,3 +43,13 @@ export default class ElementList extends Component {
     );
   }
 }
+ElementList.PropTypes = {
+  elementList: PropTypes.object
+};
+function mapStateToProps(state) {
+  return {
+    elementList: state.elementList
+  };
+}
+
+export default connect(mapStateToProps)(ElementList);
