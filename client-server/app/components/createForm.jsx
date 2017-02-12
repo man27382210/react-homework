@@ -46,18 +46,9 @@ class CreateForm extends React.Component {
     // prevent default form action
     event.preventDefault();
 
-    // get value from input form
-    const opt = {
-      owner: document.getElementById('create-form-owner').value,
-      title: document.getElementById('create-form-title').value,
-      category: document.getElementById('create-form-category').value,
-      status: document.getElementById('create-form-status').value,
-      priority: document.getElementById('create-form-priority').value,
-    };
-
     // send action to create new form element
-    if (this.checkValueExist(opt)) {
-      this.props.onCreateFormSubmit(opt);
+    if (this.checkValueExist(this.state)) {
+      this.props.onCreateFormSubmit(this.state);
       this.resetForm();
     }
   }
