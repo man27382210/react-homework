@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ElementListItem from './elementListItem.jsx';
-
 class ElementList extends Component {
   constructor() {
     super();
@@ -11,6 +10,19 @@ class ElementList extends Component {
       marginTop: '32px',
       marginBottom: '128px'
     };
+    let result = null;
+    // not an empty arry
+    if (this.props.elementList.length > 0) {
+      result = this.props.elementList.map((element, index )=> {
+        element.sequenceNumber = index + 1;
+        return (
+          <ElementListItem
+            key= {'ElementListItem' + index}
+            index= {index}
+            element = {element}
+          />);
+      });
+    }
     return (
       <div id="element-list" style={style}>
         <table className="highlight bordered centered" >
@@ -27,17 +39,7 @@ class ElementList extends Component {
           </thead>
 
           <tbody >
-            {
-              this.props.elementList.map((element, index )=> {
-                element.sequenceNumber = index + 1;
-                return (
-                  <ElementListItem
-                    key= {'ElementListItem' + index}
-                    index= {index}
-                    element = {element}
-                  />);
-              })
-            }
+            { result }
           </tbody>
         </table>
       </div>
