@@ -26,7 +26,18 @@ class CreateForm extends React.Component {
       status: Constant.STATUS_DEFAULT,
       priority: Constant.PRIORITY_DEFAULT,
     });
+    // clear dom class after reset the form
+    // clear valid for <input> and active for <label>
+    const htmlCollections = document.getElementById('create-form').getElementsByClassName('dynamic-display');
+    Array.prototype.forEach.call(htmlCollections, (DOM) => {
+      if (DOM.tagName === 'INPUT') {
+        DOM.className = DOM.className.replace(/(valid)$/, '');
+      } else if (DOM.tagName === 'LABEL') {
+        DOM.className = DOM.className.replace(/(active)$/, '');
+      }
+    });
   }
+
   checkValueExist(DOMValues) {
     let valueColumnName;
 
@@ -66,7 +77,6 @@ class CreateForm extends React.Component {
       padding: '20px',
       backgroundColor: 'white',
     };
-
     return (
       <div id="create-form" className="container z-depth-2" style={ createFormStyle }>
         <form className="col s12">
@@ -75,12 +85,12 @@ class CreateForm extends React.Component {
               <input
                 id="create-form-owner"
                 type="text"
-                className="validate"
+                className="validate dynamic-display"
                 name="owner"
                 onChange={this.onFormChange}
                 value={this.state.owner}
               />
-              <label>Owner name</label>
+              <label className="dynamic-display">Owner name</label>
             </div>
           </div>
 
@@ -89,23 +99,23 @@ class CreateForm extends React.Component {
               <input
                 id="create-form-title"
                 type="text"
-                className="validate"
+                className="validate dynamic-display"
                 onChange={this.onFormChange}
                 value={this.state.title}
                 name="title"
               />
-              <label >Title</label>
+              <label className="dynamic-display">Title</label>
             </div>
             <div className="input-field col s6">
               <input
                 id="create-form-category"
                 type="text"
-                className="validate"
+                className="validate dynamic-display"
                 onChange={this.onFormChange}
                 value={this.state.category}
                 name="category"
               />
-              <label >category </label>
+              <label className="dynamic-display">category </label>
             </div>
           </div>
 
