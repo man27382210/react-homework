@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { onElementItemEdit } from '../actions/';
+import { onElementItemEdit, onElementItemDelete } from '../actions/';
 
 class ElementListItem extends Component {
   constructor(props) {
@@ -9,13 +9,12 @@ class ElementListItem extends Component {
     this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);
   }
   onEditBtnClick() {
-    // console.log(`onEditBtnClick and element = \n${JSON.stringify(this.state)}`);
     // set state of modalDisplay
-    console.log(`index =${this.props.index}`);
     this.props.onElementItemEdit({...this.props.element, index: this.props.index});
   }
   onDeleteBtnClick() {
-    console.log(`onDeleteBtnClick = \n${JSON.stringify(this.props.element)}`);
+    // delete element from the list
+    this.props.onElementItemDelete({...this.props.element, index: this.props.index});
   }
   render() {
     const style = {
@@ -53,6 +52,7 @@ ElementListItem.propTypes = {
   element: PropTypes.object.isRequired,
   index: PropTypes.number,
   onElementItemEdit: PropTypes.func,
+  onElementItemDelete: PropTypes.func,
 };
 
-export default connect(null, {onElementItemEdit})(ElementListItem);
+export default connect(null, {onElementItemEdit, onElementItemDelete})(ElementListItem);

@@ -26,3 +26,9 @@ export function onElementItemEdit(element) {
     payload: element,
   });
 }
+export function onElementItemDelete(element) {
+  return ({
+    type: Constant.ON_ELEMENT_ITEM_DELETE,
+    payload: element,
+  });
+}
