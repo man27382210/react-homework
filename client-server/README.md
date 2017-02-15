@@ -1,12 +1,38 @@
-#Client Server
+# Client Server
+> It's a to-do list example based on react, redux, webpack.
 
-## Install and Running
+## Basics
+### Prerequisite
+* node >= 6.0.0
+
+### Feature
+* [Materialize](https://github.com/Dogfalo/materialize)
+: A modern responsive front-end framework based on Material Design
+
+## Getting started
 
 ```sh
 npm install
 
-npm start
+npm run dev
+```
 
-navigate to http://localhost:3000 in your browser of choice.
+navigate to ```http://localhost:3000``` in your browser.
 
+## Testing
+* Select ```karma``` as test runner.
+* ```Mocha``` for JavaScript test framework
+* Using ```webpack``` in order to bundle the React code
+* [Airbnb's Enzyme library](https://github.com/airbnb/enzyme) for testing React 
+
+> Test all the ```.spec.js``` in `test` folder.
+
+If you wanna execute the tests whenever one of these files changes, please run 
+```sh
+npm run test:dev
+```
+
+Otherwise, Continuous Integration mode as following
+```sh
+npm test
 ```
