@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import sinon from 'sinon';
 import { ElementListItem } from '../app/components/elementListItem.jsx';
 
 const mockElementListItem = {
@@ -51,13 +52,29 @@ describe('<ElementListItem />', () => {
       const enzymeWrapper = setup();
       expect(enzymeWrapper.find('td').at(5).text()).to.equals(mockElementListItem.priority);
     });
-    it('should render btn#edit correctly', () => {
+    it('should render btn#Edit correctly', () => {
       const enzymeWrapper = setup();
       expect(enzymeWrapper.find('td a').at(0).hasClass('indigo')).to.be.true;
     });
-    it('should render btn#edit correctly', () => {
+    it('should render btn#Delete correctly', () => {
       const enzymeWrapper = setup();
       expect(enzymeWrapper.find('td a').at(1).hasClass('red')).to.be.true;
+    });
+  });
+  describe('when Edit btn was click', () => {
+    it('onEditBtnClick should be called once', () => {
+      sinon.stub(ElementListItem.prototype, 'onEditBtnClick');
+      const enzymeWrapper = setup();
+      enzymeWrapper.find('td a').at(0).simulate('click');
+      expect(ElementListItem.prototype.onEditBtnClick.calledOnce).to.equal(true);
+    });
+  });
+  describe('when Delete btn was click', () => {
+    it('onDeleteBtnClick should be called once', () => {
+      sinon.stub(ElementListItem.prototype, 'onDeleteBtnClick');
+      const enzymeWrapper = setup();
+      enzymeWrapper.find('td a').at(1).simulate('click');
+      expect(ElementListItem.prototype.onDeleteBtnClick.calledOnce).to.equal(true);
     });
   });
 });
