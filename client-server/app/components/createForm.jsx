@@ -4,7 +4,7 @@ import { Input } from 'react-materialize';
 import { onCreateFormSubmit } from '../actions/';
 import Constant from '../common/constant';
 
-class CreateForm extends React.Component {
+export class CreateForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
