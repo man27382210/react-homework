@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { onElementItemEdit, onElementItemDelete } from '../actions/';
 
-class ElementListItem extends Component {
+export class ElementListItem extends Component {
   constructor(props) {
     super(props);
     this.onEditBtnClick = this.onEditBtnClick.bind(this);
