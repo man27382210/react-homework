@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ElementListItem from './elementListItem.jsx';
-class ElementList extends Component {
+export class ElementList extends Component {
   constructor() {
     super();
   }
