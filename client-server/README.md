@@ -1,4 +1,4 @@
-# Client Server
+# Client Server [![Build Status](https://travis-ci.org/Chun-MingChen/react-homework.svg?branch=feature/step2-redux)](https://travis-ci.org/Chun-MingChen/react-homework)
 > It's a to-do list example based on react, redux, webpack.
 
 ## Basics
