@@ -185,5 +185,16 @@ describe('<EditModal />', () => {
       expect(spyResetForm.called).to.equal(true);
     });
   });
-});
 
+  describe('componentWillReceiveProps', () => {
+    it('receive central state and set local state', () => {
+      const enzymeWrapper = setup();
+      const mockModalValue = {
+        ...mockElement,
+        owner: mockInputValue,
+      };
+      enzymeWrapper.setProps({modalDisplay: mockModalValue});
+      expect(enzymeWrapper.state('owner')).to.equal(mockInputValue);
+    });
+  });
+});

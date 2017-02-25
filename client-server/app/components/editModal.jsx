@@ -40,7 +40,7 @@ export class EditModal extends React.Component {
     });
     // if some column is empty
     if (valueColumnName) {
-      console.log(`column '${valueColumnName}' is empty`);
+      // console.log(`column '${valueColumnName}' is empty`);
     }
     return emptyValueExist;
   }
@@ -152,7 +152,7 @@ export class EditModal extends React.Component {
               </div>
             </div>
           </div>
-          <div className="modal-footer" style={style}>
+          <div className="modal-footer" id="edit-modal-submit" style={style}>
             <button
               className="modal-action modal-close btn waves-effect waves-light indigo"
               onClick={this.onEditSubmit}
