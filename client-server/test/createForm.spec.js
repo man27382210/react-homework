@@ -7,8 +7,19 @@ import sinon from 'sinon';
 import Constant from '../app/common/constant';
 
 const mockInputValue = 'test';
+const mockSubmitValue = {
+  category: 'cat1',
+  title: 'title',
+  owner: 'Nick',
+  status: Constant.STATUS_OPEN,
+  priority: Constant.PRIORITY_EMERGENCY,
+};
+
 function setup() {
-  const enzymeWrapper = mount(<CreateForm />);
+  const props = {
+    onCreateFormSubmit: sinon.spy(),
+  };
+  const enzymeWrapper = mount(<CreateForm {...props}/>);
   return enzymeWrapper;
 }
 /* render
@@ -55,7 +66,7 @@ describe('<CreateForm />', () => {
     });
   });
 
-  describe('when form field has been changed,', () => {
+  describe('#onFormChange', () => {
     let spy;
     let enzymeWrapper;
     before(() => {
@@ -75,7 +86,7 @@ describe('<CreateForm />', () => {
         const input = enzymeWrapper.find('#create-form-owner');
         input.node.value = mockInputValue;
         input.simulate('change', input);
-        expect(enzymeWrapper.state('owner')).to.equals(mockInputValue);        
+        expect(enzymeWrapper.state('owner')).to.equals(mockInputValue);
       });
     });
 
@@ -90,7 +101,7 @@ describe('<CreateForm />', () => {
         const input = enzymeWrapper.find('#create-form-title');
         input.node.value = mockInputValue;
         input.simulate('change', input);
-        expect(enzymeWrapper.state('title')).to.equals(mockInputValue);        
+        expect(enzymeWrapper.state('title')).to.equals(mockInputValue);
       });
     });
     describe('create-form-category', () => {
@@ -104,7 +115,7 @@ describe('<CreateForm />', () => {
         const input = enzymeWrapper.find('#create-form-category');
         input.node.value = mockInputValue;
         input.simulate('change', input);
-        expect(enzymeWrapper.state('category')).to.equals(mockInputValue);        
+        expect(enzymeWrapper.state('category')).to.equals(mockInputValue);
       });
     });
 
@@ -119,7 +130,7 @@ describe('<CreateForm />', () => {
         const input = enzymeWrapper.find('#create-form-status');
         input.node.value = Constant.STATUS_OPEN;
         input.simulate('change', input);
-        expect(enzymeWrapper.state('status')).to.equals(Constant.STATUS_OPEN);        
+        expect(enzymeWrapper.state('status')).to.equals(Constant.STATUS_OPEN);
       });
     });
     describe('create-form-priority', () => {
@@ -133,8 +144,42 @@ describe('<CreateForm />', () => {
         const input = enzymeWrapper.find('#create-form-priority');
         input.node.value = Constant.PRIORITY_IMPORTANT;
         input.simulate('change', input);
-        expect(enzymeWrapper.state('priority')).to.equals(Constant.PRIORITY_IMPORTANT);        
+        expect(enzymeWrapper.state('priority')).to.equals(Constant.PRIORITY_IMPORTANT);
       });
+    });
+  });
+
+  describe('#onSubmit', () => {
+    let spy;
+    let spyResetForm;
+    let enzymeWrapper;
+    before(() => {
+      spy = sinon.spy(CreateForm.prototype, 'onSubmit');
+      spyResetForm = sinon.stub(CreateForm.prototype, 'resetForm');
+    });
+
+    beforeEach(() => {
+      enzymeWrapper = setup();
+    });
+
+    it('should be called once when clicked', () => {
+      // const spㄉy = sinon.spy(CreateForm.prototype, 'onSubmit');
+      const submitBtn = enzymeWrapper.find('#create-form-submit').find('button');
+      submitBtn.simulate('click');
+      expect(spy.called).to.equal(true);
+    });
+
+    it('should not submit successfully if field are empty', () => {
+      const submitBtn = enzymeWrapper.find('#create-form-submit').find('button');
+      enzymeWrapper.setState({});
+      submitBtn.simulate('click');
+      expect(spyResetForm.called).to.equal(false);
+    });
+    it('should submit successfully if field are not empty', () => {
+      const submitBtn = enzymeWrapper.find('#create-form-submit').find('button');
+      enzymeWrapper.setState(mockSubmitValue);
+      submitBtn.simulate('click');
+      expect(spyResetForm.called).to.equal(true);
     });
   });
 });

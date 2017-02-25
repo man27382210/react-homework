@@ -48,9 +48,9 @@ export class CreateForm extends React.Component {
       return result;
     });
     // if some column is empty
-    if (valueColumnName) {
-      console.log(`column '${valueColumnName}' is empty`);
-    }
+    // if (valueColumnName) {
+    //   console.log(`column '${valueColumnName}' is empty`);
+    // }
     return emptyValueExist;
   }
   onSubmit(event) {
@@ -156,7 +156,7 @@ export class CreateForm extends React.Component {
               </Input>
             </div>
 
-            <div className="input-field col s3 offset-s3">
+            <div id ="create-form-submit" className="input-field col s3 offset-s3">
               <button onClick={this.onSubmit} className="btn waves-effect waves-light">
                 Submit
                 <i className="material-icons right">send</i>
