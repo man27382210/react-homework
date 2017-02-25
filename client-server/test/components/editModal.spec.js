@@ -148,4 +148,42 @@ describe('<EditModal />', () => {
       });
     });
   });
+
+  describe('#onSubmit', () => {
+    let spy;
+    let spyResetForm;
+    let enzymeWrapper;
+
+    beforeEach(() => {
+      spy = sinon.spy(EditModal.prototype, 'onEditSubmit');
+      spyResetForm = sinon.stub(EditModal.prototype, 'resetForm');
+      enzymeWrapper = setup();
+    });
+    afterEach(() => {
+      spy.restore();
+      spyResetForm.restore();
+    });
+
+    it('should be called once when clicked', () => {
+      const submitBtn = enzymeWrapper.find('#edit-modal-submit').find('button');
+      submitBtn.simulate('click');
+      expect(spy.called).to.equal(true);
+    });
+
+    it('should not submit successfully if field are empty', () => {
+      const submitBtn = enzymeWrapper.find('#edit-modal-submit').find('button');
+
+      enzymeWrapper.setState({category: ''});
+      submitBtn.simulate('click');
+      expect(spyResetForm.called).to.equal(false);
+    });
+
+    it('should submit successfully if field are not empty', () => {
+      const submitBtn = enzymeWrapper.find('#edit-modal-submit').find('button');
+      enzymeWrapper.setState({...mockElement});
+      submitBtn.simulate('click');
+      expect(spyResetForm.called).to.equal(true);
+    });
+  });
 });
+
