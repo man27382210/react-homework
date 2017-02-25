@@ -4,7 +4,7 @@ import { Input } from 'react-materialize';
 import { onModalEdit, onElementItemEdit } from  '../actions/';
 import Constant from '../common/constant';
 
-class EditModal extends React.Component {
+export class EditModal extends React.Component {
   constructor(props) {
     super(props);
     this.onFormChange = this.onFormChange.bind(this);
@@ -135,7 +135,7 @@ class EditModal extends React.Component {
 
               <div>
                 <Input
-                  id="edit-modal-priorty"
+                  id="edit-modal-priority"
                   s={3}
                   type="select"
                   label="priority"
