@@ -36,3 +36,6 @@ Otherwise, Continuous Integration mode as following
 ```sh
 npm test
 ```
+
+## Reference
+* [test-with-connected-components](https://github.com/reactjs/redux/blob/master/docs/recipes/WritingTests.md#connected-components)
