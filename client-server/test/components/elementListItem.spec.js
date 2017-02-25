@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { ElementListItem } from '../app/components/elementListItem.jsx';
+import { ElementListItem } from '../../app/components/elementListItem.jsx';
 
 const mockElementListItem = {
   sequenceNumber: 0,

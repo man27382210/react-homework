@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import Header from '../app/components/header.jsx';
-import CreateForm from '../app/components/createForm.jsx';
+import Header from '../../app/components/header.jsx';
+import CreateForm from '../../app/components/createForm.jsx';
 
 describe('<Header />', () => {
   describe('render DOM correctly', () => {

@@ -2,9 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import { Input } from 'react-materialize';
-import { CreateForm } from '../app/components/createForm.jsx';
+import { CreateForm } from '../../app/components/createForm.jsx';
 import sinon from 'sinon';
-import Constant from '../app/common/constant';
+import Constant from '../../app/common/constant';
 
 const mockInputValue = 'test';
 const mockSubmitValue = {
