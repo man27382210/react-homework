@@ -67,6 +67,23 @@ function* onModalEdited(action) {
     });
   }
 }
+function* onElementDeleted(action) {
+  const status = yield call(() => {
+    return axios.delete(config.API_SERVER_TODOELEMENTS + action.payload._id)
+      .then((res) => {
+        return res.status;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  if (status === Constant.HTTP_STATUS_200) {
+    yield put({
+      type: Constant.ON_ELEMENT_ITEM_DELETE_SUCCEEDED,
+      payload: action.payload
+    });
+  }
+}
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
@@ -75,6 +92,7 @@ function* rootSaga() {
   yield takeLatest(Constant.ON_ELEMENT_LIST_INIT, fetchElementList);
   yield takeEvery(Constant.ON_CREATE_FORM_SUBMIT, onElementCreated);
   yield takeEvery(Constant.ON_MODAL_EDIT, onModalEdited);
+  yield takeEvery(Constant.ON_ELEMENT_ITEM_DELETE, onElementDeleted);
 }
 
 /*

@@ -10,6 +10,7 @@ export default {
   ELEMENT_LIST_FETCH_SUCCEEDED: 'ELEMENT_LIST_FETCH_SUCCEEDED',
   ON_CREATE_FORM_SUBMIT_SUCCEEDED: 'ON_CREATE_FORM_SUBMIT_SUCCEEDED',
   ON_MODAL_EDIT_SUCCEEDED: 'ON_MODAL_EDIT_SUCCEEDED',
+  ON_ELEMENT_ITEM_DELETE_SUCCEEDED: 'ON_ELEMENT_ITEM_DELETE_SUCCEEDED',
 
   // option value of priority
   PRIORITY_DEFAULT: '',
@@ -32,5 +33,5 @@ export default {
 
   // others
   COLUMN_TITLES: ['owner', 'title', 'category', 'status', 'priority'],
-
+  HTTP_STATUS_200: 200,
 };

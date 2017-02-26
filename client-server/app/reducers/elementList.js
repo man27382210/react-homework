@@ -20,7 +20,7 @@ export default (state =  defaultValue, action) => {
     newArray = [...state];
     newArray[index] = editedElement;
     return (newArray);
-  case constant.ON_ELEMENT_ITEM_DELETE:
+  case constant.ON_ELEMENT_ITEM_DELETE_SUCCEEDED:
     index = action.payload.index;
 
     // remove element with specific index
