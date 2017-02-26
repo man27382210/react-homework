@@ -1,12 +1,6 @@
 import constant from '../common/constant';
 
-const defaultValue = [{
-  category: 'cat1',
-  title: 'title',
-  owner: 'Nick',
-  status: 'Open',
-  priority: 'Emergency',
-}];
+const defaultValue = [];
 
 export default (state =  defaultValue, action) => {
   let newArray = [];

@@ -27,13 +27,15 @@
     "jscs": "jscs ."
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-cli": "^6.4.0",
     "materialize-css": "^0.98.0",
     "react": "^15.4.2",
     "react-dom": "^15.3.2",
     "react-materialize": "^0.18.1",
     "react-redux": "^5.0.2",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",

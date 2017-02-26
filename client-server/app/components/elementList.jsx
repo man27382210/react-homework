@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ElementListItem from './elementListItem.jsx';
+import { onElementListInit } from '../actions/';
+
+
 export class ElementList extends Component {
   constructor() {
     super();
+  }
+  componentDidMount() {
+    // ask for todoElementList from here
+    this.props.onElementListInit();
   }
   render() {
     const style = {
@@ -47,7 +54,8 @@ export class ElementList extends Component {
   }
 }
 ElementList.propTypes = {
-  elementList: PropTypes.array
+  elementList: PropTypes.array,
+  onElementListInit: PropTypes.func,
 };
 function mapStateToProps(state) {
   return {
@@ -55,4 +63,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ElementList);
+export default connect(mapStateToProps, { onElementListInit })(ElementList);
