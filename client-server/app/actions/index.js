@@ -1,20 +1,8 @@
-import axios from 'axios';
 import Constant from '../common/constant';
-import config from '../common/config';
 
 export function onElementListInit() {
-  let elementList = [];
-  elementList = axios.get(config.API_SERVER_TODOELEMENTS)
-    .then((res) => {
-      console.log(res.data);
-      elementList = res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   return ({
     type: Constant.ON_ELEMENT_LIST_INIT,
-    payload: elementList,
   });
 }
 export function onCreateFormSubmit(element) {

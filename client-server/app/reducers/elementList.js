@@ -28,6 +28,9 @@ export default (state =  defaultValue, action) => {
       return (i !== index);
     });
     return newArray;
+  case constant.ELEMENT_LIST_FETCH_SUCCEEDED:
+    newArray = [...defaultValue, ...action.payload];
+    return (newArray);
   default:
     return state;
   }
