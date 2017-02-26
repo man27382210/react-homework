@@ -54,14 +54,13 @@ export default ({ config, db }) => resource({
 				res.json(collection);
 			})
 			.catch((err) => {
-				console.log(err.errors);
+				console.log(err);
 				res.sendStatus(500);
 			});
 	},
 
 	/** DELETE /:id - Delete a given entity */
 	delete({ todoElement }, res) {
-		console.log(todoElement);
 		TodoElement.findByIdAndRemove(todoElement._id)
 			.then(() => {
 				res.sendStatus(200);

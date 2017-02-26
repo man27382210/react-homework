@@ -51,7 +51,8 @@ function* onElementCreated(action) {
 }
 function* onModalEdited(action) {
   const element = yield call(() => {
-    return axios.put(config.API_SERVER_TODOELEMENTS + action.payload._id, action.payload)
+    const {category, title, owner, status, priority} = action.payload;
+    return axios.put(config.API_SERVER_TODOELEMENTS + action.payload._id, {category, title, owner, status, priority})
       .then((res) => {
         return res.data;
       })
