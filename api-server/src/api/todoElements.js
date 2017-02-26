@@ -1,5 +1,5 @@
 import resource from 'resource-router-middleware';
-import todoElements from '../models/todoElements';
+import TodoElement from '../models/todoElement';
 
 export default ({ config, db }) => resource({
 
@@ -10,41 +10,70 @@ export default ({ config, db }) => resource({
 	 *  Errors terminate the request, success sets `req[id] = data`.
 	 */
 	load(req, id, callback) {
-		let todoElement = todoElements.find( todoElement => todoElement.id===id ),
-			err = todoElement ? null : 'Not found';
-		callback(err, todoElement);
+		// callback(error message, collectionFound)
+		TodoElement.findById(id)
+			.then((todoElement) => {
+				callback(undefined, todoElement);
+			})
+			.catch(() => {
+				callback('todoElement Not found');
+			});
 	},
 
 	/** GET / - List all entities */
 	index({ params }, res) {
-		res.json(todoElements);
+		TodoElement.find({})
+			.then((todoElements) => {
+				res.json(todoElements);
+			})
+			.catch(() => {
+				res.sendStatus(500);
+			});
 	},
 
 	/** POST / - Create a new entity */
 	create({ body }, res) {
-		body.id = todoElements.length.toString(36);
-		todoElements.push(body);
-		res.json(body);
-	},
-
-	/** GET /:id - Return a given entity */
-	read({ todoElement }, res) {
-		res.json(todoElement);
+		let todoElement = new TodoElement(body);
+		todoElement.save()
+			.then(()=> {
+				// todoElement has been saved successfully
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				console.log(err.errors);
+				res.sendStatus(500);
+			});
 	},
 
 	/** PUT /:id - Update a given entity */
 	update({ todoElement, body }, res) {
-		for (let key in body) {
-			if (key!=='id') {
-				todoElement[key] = body[key];
-			}
-		}
-		res.sendStatus(204);
+		let opts = { runValidators: true }
+		TodoElement.findOneAndUpdate(todoElement, body, opts)
+			.then(() => {
+				// update successfully
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				console.log(err.errors);
+				res.sendStatus(500);
+			});
 	},
 
 	/** DELETE /:id - Delete a given entity */
 	delete({ todoElement }, res) {
-		todoElements.splice(todoElements.indexOf(todoElement), 1);
-		res.sendStatus(204);
+		console.log(todoElement);
+		TodoElement.findByIdAndRemove(todoElement._id)
+			.then(() => {
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				console.log(err.errors);
+				res.sendStatus(500);
+			});
 	}
+	
+	/** GET /:id - Return a given entity */
+	// read({ todoElement }, res) {
+	// 	res.json(todoElement);
+	// },
 });
