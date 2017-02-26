@@ -32,12 +32,30 @@ function* fetchElementList() {
     payload: elementList,
   });
 }
+function* onElementCreated(action) {
+  const element = yield call(() => {
+    return axios.post(config.API_SERVER_TODOELEMENTS, action.payload)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  });
+  if (element) {
+    yield put({
+      type: Constant.ON_CREATE_FORM_SUBMIT_SUCCEEDED,
+      payload: element,
+    });
+  }
+}
 /*
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
 */
 function* rootSaga() {
   yield takeLatest(Constant.ON_ELEMENT_LIST_INIT, fetchElementList);
+  yield takeEvery(Constant.ON_CREATE_FORM_SUBMIT, onElementCreated);
 }
 
 /*

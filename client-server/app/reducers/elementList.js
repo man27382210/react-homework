@@ -6,7 +6,7 @@ export default (state =  defaultValue, action) => {
   let newArray = [];
   let index;
   switch (action.type) {
-  case constant.ON_CREATE_FORM_SUBMIT:
+  case constant.ON_CREATE_FORM_SUBMIT_SUCCEEDED:
     newArray = [...state];
     newArray.push(action.payload);
     return (newArray);

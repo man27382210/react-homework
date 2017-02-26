@@ -35,9 +35,9 @@ export default ({ config, db }) => resource({
 	create({ body }, res) {
 		let todoElement = new TodoElement(body);
 		todoElement.save()
-			.then(()=> {
+			.then((collection)=> {
 				// todoElement has been saved successfully
-				res.sendStatus(200);
+				res.json(collection);
 			})
 			.catch((err) => {
 				console.log(err.errors);
@@ -71,7 +71,7 @@ export default ({ config, db }) => resource({
 				res.sendStatus(500);
 			});
 	}
-	
+
 	/** GET /:id - Return a given entity */
 	// read({ todoElement }, res) {
 	// 	res.json(todoElement);
