@@ -10,7 +10,7 @@ export default (state =  defaultValue, action) => {
     newArray = [...state];
     newArray.push(action.payload);
     return (newArray);
-  case constant.ON_MODAL_EDIT:
+  case constant.ON_MODAL_EDIT_SUCCEEDED:
     // edit element according to index
     index = action.payload.index;
     const editedElement = {...action.payload};

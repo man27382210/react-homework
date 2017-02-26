@@ -18,13 +18,13 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 function* fetchElementList() {
   const elementList = yield call(() => {
     return axios.get(config.API_SERVER_TODOELEMENTS)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return [];
-    });
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return [];
+      });
   });
 
   yield put({
@@ -35,16 +35,34 @@ function* fetchElementList() {
 function* onElementCreated(action) {
   const element = yield call(() => {
     return axios.post(config.API_SERVER_TODOELEMENTS, action.payload)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
   if (element) {
     yield put({
       type: Constant.ON_CREATE_FORM_SUBMIT_SUCCEEDED,
+      payload: element,
+    });
+  }
+}
+function* onModalEdited(action) {
+  const element = yield call(() => {
+    return axios.put(config.API_SERVER_TODOELEMENTS + action.payload._id, action.payload)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  if (element) {
+    element.index = action.payload.index;
+    yield put({
+      type: Constant.ON_MODAL_EDIT_SUCCEEDED,
       payload: element,
     });
   }
@@ -56,6 +74,7 @@ function* onElementCreated(action) {
 function* rootSaga() {
   yield takeLatest(Constant.ON_ELEMENT_LIST_INIT, fetchElementList);
   yield takeEvery(Constant.ON_CREATE_FORM_SUBMIT, onElementCreated);
+  yield takeEvery(Constant.ON_MODAL_EDIT, onModalEdited);
 }
 
 /*

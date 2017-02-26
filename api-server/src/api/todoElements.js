@@ -47,11 +47,11 @@ export default ({ config, db }) => resource({
 
 	/** PUT /:id - Update a given entity */
 	update({ todoElement, body }, res) {
-		let opts = { runValidators: true }
-		TodoElement.findOneAndUpdate(todoElement, body, opts)
-			.then(() => {
+		let opts = { runValidators: true , new: true}
+		TodoElement.findOneAndUpdate(todoElement._id, body, opts)
+			.then((collection) => {
 				// update successfully
-				res.sendStatus(200);
+				res.json(collection);
 			})
 			.catch((err) => {
 				console.log(err.errors);

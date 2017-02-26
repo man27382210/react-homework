@@ -33,7 +33,7 @@ export class EditModal extends React.Component {
     let valueColumnName;
 
     // check existance of each column
-    const emptyValueExist = Object.keys(DOMValues).every((key) => {
+    const emptyValueExist = Constant.COLUMN_TITLES.every((key) => {
       const result = DOMValues[key] ? true : false;
       if (!result) valueColumnName = key;
       return result;
