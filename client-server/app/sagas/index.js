@@ -3,18 +3,6 @@ import Constant from '../common/constant';
 import config from '../common/config';
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
-
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-// function* fetchUser(action) {
-//    try {
-//       const user = yield call(Api.fetchUser, action.payload.userId);
-//       yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-//    } catch (e) {
-//       yield put({type: "USER_FETCH_FAILED", message: e.message});
-//    }
-// }
-
-
 function* fetchElementList() {
   const elementList = yield call(() => {
     return axios.get(config.API_SERVER_TODOELEMENTS)
@@ -50,21 +38,20 @@ function* onElementCreated(action) {
   }
 }
 function* onModalEdited(action) {
-  const element = yield call(() => {
+  const httpStatus = yield call(() => {
     const {category, title, owner, status, priority} = action.payload;
     return axios.put(config.API_SERVER_TODOELEMENTS + action.payload._id, {category, title, owner, status, priority})
       .then((res) => {
-        return res.data;
+        return res.status;
       })
       .catch((err) => {
         console.log(err);
       });
   });
-  if (element) {
-    element.index = action.payload.index;
+  if (httpStatus === Constant.HTTP_STATUS_200) {
     yield put({
       type: Constant.ON_MODAL_EDIT_SUCCEEDED,
-      payload: element,
+      payload: action.payload,
     });
   }
 }
@@ -95,16 +82,5 @@ function* rootSaga() {
   yield takeEvery(Constant.ON_MODAL_EDIT, onModalEdited);
   yield takeEvery(Constant.ON_ELEMENT_ITEM_DELETE, onElementDeleted);
 }
-
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
-// function* mySaga() {
-//   yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
-// }
 
 export default rootSaga;

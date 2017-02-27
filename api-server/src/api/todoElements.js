@@ -49,9 +49,9 @@ export default ({ config, db }) => resource({
 	update({ todoElement, body }, res) {
 		let opts = { runValidators: true , new: true}
 		TodoElement.findOneAndUpdate(todoElement._id, body, opts)
-			.then((collection) => {
+			.then(() => {
 				// update successfully
-				res.json(collection);
+				res.sendStatus(200);
 			})
 			.catch((err) => {
 				console.log(err);
