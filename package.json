@@ -5,10 +5,9 @@
   "scripts": {
     "install:all": "cd ./client-server  && npm install && cd ../api-server && npm install",
     "list": "./pm2_remote ls",
-    "build-api": "npm build ./api-server",
-    "serve:all": "npm run build-api && ./pm2_remote start ecosystem.config.js",
+    "serve:all": "./pm2_remote start ecosystem.config.js",
     "serve:cli": "./pm2_remote start ecosystem.config.js --only client-server",
-    "serve:api": "npm run build-api && ./pm2_remote start ecosystem.config.js --only api-server",
+    "serve:api": "./pm2_remote start ecosystem.config.js --only api-server",
     "stop:all": "./pm2_remote stop ecosystem.config.js",
     "restart:all": "./pm2_remote restart ecosystem.config.js",
     "reload:all": "./pm2_remote reload ecosystem.config.js",

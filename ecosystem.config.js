@@ -4,14 +4,15 @@ module.exports = {
     {
       name: "client-server",
       script: "server.js",
-      watch: true,
+      watch: false,
       cwd: './client-server/'
     },
     // Second application
     {
       name: "api-server",
-      script: "dist",
-      watch: true,
+      script: "npm",
+      args: 'start',
+      watch: false,
       cwd: './api-server/'
     }
   ],
