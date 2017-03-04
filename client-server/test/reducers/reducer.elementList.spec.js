@@ -52,4 +52,14 @@ describe('elementList reducer', () => {
 
     expect(reducer(undefined, action)).to.deep.equal(result);
   });
+  it('should handle ELEMENT_LIST_FETCH_SUCCEEDED', () => {
+    // mock elementList which ask from api-server.
+    const mockElementList = Array.apply(null, new Array(2)).map(() => mockElement);
+    const action = {
+      type: Constant.ELEMENT_LIST_FETCH_SUCCEEDED,
+      payload: mockElementList,
+    };
+    const result = [...defaultValue, ...mockElementList];
+    expect(reducer(undefined, action)).to.deep.equal(result);
+  });
 });
