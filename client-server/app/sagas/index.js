@@ -1,19 +1,9 @@
-import axios from 'axios';
 import Constant from '../common/constant';
-import config from '../common/config';
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import * as Api from './api';
 
-function* fetchElementList() {
-  const elementList = yield call(() => {
-    return axios.get(config.API_SERVER_TODOELEMENTS)
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-        return [];
-      });
-  });
+export function* fetchElementList() {
+  const elementList = yield call(Api.getTodoElements);
 
   yield put({
     type: Constant.ELEMENT_LIST_FETCH_SUCCEEDED,
@@ -21,15 +11,7 @@ function* fetchElementList() {
   });
 }
 function* onElementCreated(action) {
-  const element = yield call(() => {
-    return axios.post(config.API_SERVER_TODOELEMENTS, action.payload)
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  const element = yield call(Api.postTodoElements, action);
   if (element) {
     yield put({
       type: Constant.ON_CREATE_FORM_SUBMIT_SUCCEEDED,
@@ -38,16 +20,8 @@ function* onElementCreated(action) {
   }
 }
 function* onModalEdited(action) {
-  const httpStatus = yield call(() => {
-    const {category, title, owner, status, priority} = action.payload;
-    return axios.put(config.API_SERVER_TODOELEMENTS + action.payload._id, {category, title, owner, status, priority})
-      .then((res) => {
-        return res.status;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  const httpStatus = yield call(Api.putTodoElement, action);
+
   if (httpStatus === Constant.HTTP_STATUS_200) {
     yield put({
       type: Constant.ON_MODAL_EDIT_SUCCEEDED,
@@ -56,15 +30,8 @@ function* onModalEdited(action) {
   }
 }
 function* onElementDeleted(action) {
-  const status = yield call(() => {
-    return axios.delete(config.API_SERVER_TODOELEMENTS + action.payload._id)
-      .then((res) => {
-        return res.status;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+  const status = yield call(Api.deleteTodoElement, action);
+
   if (status === Constant.HTTP_STATUS_200) {
     yield put({
       type: Constant.ON_ELEMENT_ITEM_DELETE_SUCCEEDED,
@@ -72,9 +39,9 @@ function* onElementDeleted(action) {
     });
   }
 }
+
 /*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
+  Starts rootSaga
 */
 function* rootSaga() {
   yield takeLatest(Constant.ON_ELEMENT_LIST_INIT, fetchElementList);
