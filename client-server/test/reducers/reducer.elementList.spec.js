@@ -2,13 +2,7 @@ import reducer from '../../app/reducers/elementList';
 import Constant from '../../app/common/constant';
 import { expect } from 'chai';
 
-const defaultValue = [{
-  category: 'cat1',
-  title: 'title',
-  owner: 'Nick',
-  status: 'Open',
-  priority: 'Emergency',
-}];
+const defaultValue = [];
 const mockElement = {
   category: 'mockCategory',
   title: 'mockTitle',
@@ -23,20 +17,20 @@ describe('elementList reducer', () => {
     expect(reducer(undefined, {})).to.deep.equal(defaultValue);
   });
 
-  it('should handle ON_CREATE_FORM_SUBMIT', () => {
+  it('should handle ON_CREATE_FORM_SUBMIT_SUCCEEDED', () => {
     const action = {
-      type: Constant.ON_CREATE_FORM_SUBMIT,
+      type: Constant.ON_CREATE_FORM_SUBMIT_SUCCEEDED,
       payload: mockElement,
     };
     const result = [...defaultValue, mockElement];
     expect(reducer(undefined, action)).to.deep.equal(result);
   });
 
-  it('should handle ON_MODAL_EDIT', () => {
+  it('should handle ON_MODAL_EDIT_SUCCEEDED', () => {
     // change value of array[index] to mockElement
 
     const action = {
-      type: Constant.ON_MODAL_EDIT,
+      type: Constant.ON_MODAL_EDIT_SUCCEEDED,
       payload: {...mockElement, index: mockIndex},
     };
     const result = [...defaultValue];
@@ -45,11 +39,11 @@ describe('elementList reducer', () => {
     expect(reducer(undefined, action)).to.deep.equal(result);
   });
 
-  it('should handle ON_ELEMENT_ITEM_DELETE', () => {
+  it('should handle ON_ELEMENT_ITEM_DELETE_SUCCEEDED', () => {
     // delete element at array[index]
 
     const action = {
-      type: Constant.ON_ELEMENT_ITEM_DELETE,
+      type: Constant.ON_ELEMENT_ITEM_DELETE_SUCCEEDED,
       payload: {...mockElement, index: mockIndex},
     };
     let result = [...defaultValue];
