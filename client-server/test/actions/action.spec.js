@@ -11,6 +11,14 @@ const mockElement = {
 };
 
 describe('actions', () => {
+  describe('#onElementListInit', () => {
+    it('should create an action to init element lists', ()=> {
+      const expectedAction = {
+        type: Constant.ON_ELEMENT_LIST_INIT,
+      };
+      expect(actions.onElementListInit()).to.deep.equal(expectedAction);
+    });
+  });
   describe('#onCreateFormSubmit', () => {
     it('should create an action to submit form', ()=> {
       const expectedAction = {
