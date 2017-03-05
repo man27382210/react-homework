@@ -3,15 +3,12 @@ node_js:
   - "node"
   - "6"
 
-before_install:
-  - cd client-server/
-
 install: 
-  - npm install
+  - npm run install:all
 
 branches:
   only:
   - /^feature\/step/
 
 script:
-  - npm test
+  - npm run test:all
