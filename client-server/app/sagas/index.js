@@ -10,7 +10,7 @@ export function* fetchElementList() {
     payload: elementList,
   });
 }
-function* onElementCreated(action) {
+export function* onElementCreated(action) {
   const element = yield call(Api.postTodoElements, action);
   if (element) {
     yield put({
@@ -19,7 +19,7 @@ function* onElementCreated(action) {
     });
   }
 }
-function* onModalEdited(action) {
+export function* onModalEdited(action) {
   const httpStatus = yield call(Api.putTodoElement, action);
 
   if (httpStatus === Constant.HTTP_STATUS_200) {
@@ -29,7 +29,7 @@ function* onModalEdited(action) {
     });
   }
 }
-function* onElementDeleted(action) {
+export function* onElementDeleted(action) {
   const status = yield call(Api.deleteTodoElement, action);
 
   if (status === Constant.HTTP_STATUS_200) {
