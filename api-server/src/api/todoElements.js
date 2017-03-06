@@ -39,8 +39,7 @@ export default ({ config, db }) => resource({
 				// todoElement has been saved successfully
 				res.json(collection);
 			})
-			.catch((err) => {
-				console.log(err.errors);
+			.catch(() => {
 				res.sendStatus(500);
 			});
 	},
