@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "install:all": "cd ./client-server  && npm install && cd ../api-server && npm install",
-    "test:all": "cd ./client-server && npm test",
+    "test:cli": "cd ./client-server && npm test",
+    "test:api": "cd ./api-server && npm test",
     "list": "./pm2_remote ls",
     "serve:all": "./pm2_remote start ecosystem.config.js",
     "serve:cli": "./pm2_remote start ecosystem.config.js --only client-server",

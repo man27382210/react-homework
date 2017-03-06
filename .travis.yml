@@ -11,4 +11,5 @@ branches:
   - /^feature\/step/
 
 script:
-  - npm run test:all
+  - npm run test:cli
+  - npm run test:api

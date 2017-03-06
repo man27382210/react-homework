@@ -39,8 +39,7 @@ export default ({ config, db }) => resource({
 				// todoElement has been saved successfully
 				res.json(collection);
 			})
-			.catch((err) => {
-				console.log(err.errors);
+			.catch(() => {
 				res.sendStatus(500);
 			});
 	},
@@ -53,8 +52,7 @@ export default ({ config, db }) => resource({
 				// update successfully
 				res.sendStatus(200);
 			})
-			.catch((err) => {
-				console.log(err);
+			.catch(() => {
 				res.sendStatus(500);
 			});
 	},
@@ -66,7 +64,6 @@ export default ({ config, db }) => resource({
 				res.sendStatus(200);
 			})
 			.catch((err) => {
-				console.log(err.errors);
 				res.sendStatus(500);
 			});
 	}

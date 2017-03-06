@@ -4,9 +4,9 @@
 // export default todoElements;
 
 import mongoose from 'mongoose';
-import { mongodbUrl } from '../config.json';
+import { mongodbUrl, TESTING_ENV } from '../config.json';
 
-mongoose.connect(mongodbUrl);
+if (process.env.NODE_ENV !== TESTING_ENV) mongoose.connect(mongodbUrl);
 
 // Use native promises
 mongoose.Promise = global.Promise;
