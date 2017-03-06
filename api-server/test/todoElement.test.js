@@ -128,4 +128,57 @@ describe('todoElements', () => {
       });
     });
   });
+  describe('DELETE /:id', () => {
+    afterEach(() => {
+      TodoElement.findById.restore();
+    });
+    describe('when find out designated element with id', () => {
+      afterEach(() => {
+        TodoElement.findByIdAndRemove.restore();
+      });
+      describe('delete element successfully,', () => {
+        it('should return status 200', (done) => {
+          const mockId = mockCollection._id.toString();
+          sinon.stub(TodoElement, 'findById').withArgs(mockId).returns(Promise.resolve(mockCollection));
+          sinon.stub(TodoElement, 'findByIdAndRemove')
+            .withArgs(mockCollection._id)
+            .returns(Promise.resolve());
+
+          request(app)
+            .delete(TODOELEMENTS_URL + '/' + mockId)
+            .send(mockTodoElement)
+            .expect(200, done);
+        });
+      });
+      describe('but delete element failed,', () => {
+        it('should return status 500', (done) => {
+          const mockId = mockCollection._id.toString();
+            sinon.stub(TodoElement, 'findById').withArgs(mockId).returns(Promise.resolve(mockCollection));
+            sinon.stub(TodoElement, 'findByIdAndRemove')
+              .withArgs(mockCollection._id)
+              .returns(Promise.reject());
+
+            request(app)
+              .delete(TODOELEMENTS_URL + '/' + mockId)
+              .send(mockTodoElement)
+              .expect(500, done);
+        });
+      });
+    });
+    describe('when failed to find out the element in DB, ', () => {
+      it('should return status 404 and error message', (done) => {
+        const mockId = mockCollection._id.toString();
+
+        sinon.stub(TodoElement, 'findById').withArgs(mockId).returns(Promise.reject());
+        request(app)
+          .delete(TODOELEMENTS_URL + '/' + mockId)
+          .send(mockTodoElement)
+          .expect(404)
+          .end((err, res) => {
+            expect(res.error.text).to.equal('todoElement Not found');
+            done();
+          })
+      });
+    });
+  });
 });

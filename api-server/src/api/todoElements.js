@@ -64,7 +64,6 @@ export default ({ config, db }) => resource({
 				res.sendStatus(200);
 			})
 			.catch((err) => {
-				console.log(err.errors);
 				res.sendStatus(500);
 			});
 	}
