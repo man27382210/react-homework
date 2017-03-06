@@ -93,8 +93,13 @@ docker stop todo_list_server
 As long as stop container, it will be ```delete``` immediately because of config ```--rm```.
 
 ## Testing
+Testing for ```api-server```
 ```sh
-npm run test:all
+npm run test:api
+```
+Testing for ```cli-server```
+```sh
+npm run test:cli
 ```
 * [trevor](https://github.com/vadimdemedes/trevor): 
 Your own mini Travis CI to run tests locally
