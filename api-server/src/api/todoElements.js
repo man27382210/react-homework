@@ -52,8 +52,7 @@ export default ({ config, db }) => resource({
 				// update successfully
 				res.sendStatus(200);
 			})
-			.catch((err) => {
-				console.log(err);
+			.catch(() => {
 				res.sendStatus(500);
 			});
 	},
