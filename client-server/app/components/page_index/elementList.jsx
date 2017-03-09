@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { onElementListInit } from 'actions';
 import ElementListItem from './elementListItem.jsx';
-import { onElementListInit } from '../actions/';
 
 
 export class ElementList extends Component {

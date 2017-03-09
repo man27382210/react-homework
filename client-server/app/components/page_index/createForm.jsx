@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
-import { onCreateFormSubmit } from '../actions/';
-import Constant from '../common/constant';
+import { onCreateFormSubmit } from 'actions';
+import Constant from 'common/constant';
 
 export class CreateForm extends React.Component {
   constructor(props) {
