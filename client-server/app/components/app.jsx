@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { onElementListInit, onInitLoadingFinish } from 'actions';
-
+import LoadingAnimation from 'components/common/loadingAnimation.jsx';
+const ANIMATION_STAY_SECOND = 0.8;
 class App extends React.Component {
 
+  constructor() {
+    super();
+    this.Init = this.Init.bind(this);
+    this.state = {
+      finishDelay: false,
+    };
+  }
   componentDidMount() {
-    // application initialize
-    console.log('welcome visiting :)');
-
-    // ask for todoElementList from here
-    this.props.onElementListInit();
+    this.Init();
   }
   componentWillReceiveProps(nextProps) {
     // when elementList was set as initializing,
@@ -18,12 +22,30 @@ class App extends React.Component {
       if (!this.props.loadingFinished) this.props.onInitLoadingFinish(true);
     }
   }
+  Init() {
+    // application initialize
+    console.log('welcome visiting :)');
 
+    // waiting for play waiting animtion
+    setTimeout(() => {
+      this.setState({
+        finishDelay: true
+      });
+    }, ANIMATION_STAY_SECOND * 1000);
+
+    // ask for todoElementList from here
+    this.props.onElementListInit();
+  }
   render() {
+    if (this.state.finishDelay && this.props.loadingFinished) {
+      return (
+        <div>
+          {this.props.children}
+        </div>
+      );
+    }
     return (
-      <div>
-        {this.props.children}
-      </div>
+      <LoadingAnimation />
     );
   }
 }
