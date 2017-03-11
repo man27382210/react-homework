@@ -8,7 +8,7 @@ import PageNotFound from 'components/common/notFound.jsx';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={PageIndex}/>
-    <Route path="/edit/:id" component={PageEdit}/>
+    <Route path="/edit/:index" component={PageEdit}/>
     <Route path="*" component={PageNotFound}/>
   </Route>
 );
