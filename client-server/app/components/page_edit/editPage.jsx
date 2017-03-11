@@ -1,26 +1,51 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import EditModal from './editModal.jsx';
 import { connect } from 'react-redux';
+import Constant from 'common/constant';
 
 class EditPage extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
+  constructor() {
+    super();
+    this.checkValidPage = this.checkValidPage.bind(this);
+    this.state = {
+      element: {
+        owner: Constant.OWNER_DEFAULT,
+        title: Constant.TITLE_DEFAULT,
+        category: Constant.CATEGORY_DEFAULT,
+        status: Constant.STATUS_DEFAULT,
+        priority: Constant.PRIORITY_DEFAULT,
+      }
+    };
   }
   componentWillMount() {
-    // if it's the first time to visit this app.
-    if (this.props.elementList.length <= 0) {
-      console.log('welcome visiting :)');
-
-    }
+    /*
+     * the component is going to render that means elementList has been loaded.
+     * so it is unnecessary to check if elementList has been fininshed loading or not.
+     */
+    this.checkValidPage();
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('nextProps');
-    console.log(nextProps);
-    // // receive central state and set local state
-    // this.setState({
-    //   ...nextProps.modalDisplay
-    // });
+  checkValidPage() {
+    // if the index element are not exsit or any other error.
+    return new Promise((resolve, reject) => {
+      const element = this.props.elementList[this.context.router.params.index - 1];
+      if (element) {
+        resolve(element);
+      } else {
+        reject('404');
+      }
+    })
+      .then((element) => {
+        // set state
+        this.setState({
+          element: {
+            ...element,
+            sequenceNumber: this.context.router.params.index
+          }
+        });
+      })
+      .catch(() => {
+        this.context.router.replace('/NotFound');
+      });
   }
   render() {
     const style = {
@@ -32,12 +57,20 @@ class EditPage extends React.Component {
         className="valign-wrapper"
         style={style}
       >
-        <EditModal />
+        <EditModal element={this.state.element}/>
       </div>
 
     );
   }
 }
+
+EditPage.contextTypes = {
+  router: React.PropTypes.object
+};
+
+EditPage.propTypes = {
+  elementList: PropTypes.array,
+};
 function mapStateToProps(state) {
   return {
     elementList: state.elementList
