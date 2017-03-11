@@ -30,7 +30,7 @@ export class ElementListItem extends Component {
         <td>{ this.props.element.owner }</td>
         <td>{ this.props.element.priority }</td>
         <td>
-          <Link to={`/edit/${this.props.index}`}
+          <Link to={`/edit/${this.props.index + 1}`}
             className="btn-floating waves-effect waves-light indigo"
             style={style}
             onClick={ this.onEditBtnClick }

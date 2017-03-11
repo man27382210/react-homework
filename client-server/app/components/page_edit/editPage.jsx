@@ -8,7 +8,7 @@ class EditPage extends React.Component {
     super();
     this.checkValidPage = this.checkValidPage.bind(this);
     this.state = {
-      element: {
+      modalDisplay: {
         owner: Constant.OWNER_DEFAULT,
         title: Constant.TITLE_DEFAULT,
         category: Constant.CATEGORY_DEFAULT,
@@ -37,9 +37,10 @@ class EditPage extends React.Component {
       .then((element) => {
         // set state
         this.setState({
-          element: {
+          modalDisplay: {
             ...element,
-            sequenceNumber: this.context.router.params.index
+            sequenceNumber: this.context.router.params.index,
+            index: this.context.router.params.index - 1,
           }
         });
       })
@@ -57,7 +58,7 @@ class EditPage extends React.Component {
         className="valign-wrapper"
         style={style}
       >
-        <EditModal element={this.state.element}/>
+        <EditModal modalDisplay={this.state.modalDisplay}/>
       </div>
 
     );

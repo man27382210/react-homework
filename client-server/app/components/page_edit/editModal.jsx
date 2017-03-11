@@ -1,21 +1,24 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
-import Constant from '../../common/constant';
+import { Link } from 'react-router';
+import Constant from 'common/constant';
+import { onModalEdit } from 'actions';
 
-export default class EditModal extends React.Component {
+export class EditModal extends React.Component {
   constructor(props) {
     super(props);
     this.onFormChange = this.onFormChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.resetForm = this.resetForm.bind(this);
-
     this.state = {
-      owner: Constant.OWNER_DEFAULT,
-      title: Constant.TITLE_DEFAULT,
-      category: Constant.CATEGORY_DEFAULT,
-      status: Constant.STATUS_DEFAULT,
-      priority: Constant.PRIORITY_DEFAULT,
+      ...props.modalDisplay
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    // receive central state and set local state
+    this.setState({
+      ...nextProps.modalDisplay
+    });
   }
   checkValueExist(DOMValues) {
     let valueColumnName;
@@ -32,22 +35,6 @@ export default class EditModal extends React.Component {
     }
     return emptyValueExist;
   }
-  resetForm() {
-    this.setState({
-      owner: Constant.OWNER_DEFAULT,
-      title: Constant.TITLE_DEFAULT,
-      category: Constant.CATEGORY_DEFAULT,
-      status: Constant.STATUS_DEFAULT,
-      priority: Constant.PRIORITY_DEFAULT,
-    });
-    // this.props.onElementItemEdit({
-    //   owner: Constant.OWNER_DEFAULT,
-    //   title: Constant.TITLE_DEFAULT,
-    //   category: Constant.CATEGORY_DEFAULT,
-    //   status: Constant.STATUS_DEFAULT,
-    //   priority: Constant.PRIORITY_DEFAULT,
-    // });
-  }
   onFormChange(event) {
     if (this.state.hasOwnProperty(event.target.name)) {
       const value = {};
@@ -59,16 +46,16 @@ export default class EditModal extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-
     const fieldValue = {...this.state};
-    console.log(fieldValue);
     // do not validate attribute of 'index'
-    // delete fieldValue.index;
+    delete fieldValue.index;
 
-    // send action to create new form element
+    // send action to update element
     if (this.checkValueExist(fieldValue)) {
-    //   this.props.onModalEdit(this.state);
-      this.resetForm();
+      this.props.onModalEdit(this.state);
+
+      // navigate to index page
+      this.context.router.push('/');
     }
   }
   render() {
@@ -87,12 +74,12 @@ export default class EditModal extends React.Component {
     return (
       <div id="edit-modal" className="container z-depth-2 valign" style={ formStyle }>
         {/* go-back btn */}
-        <a
+        <Link to="/"
           className="btn-large waves-effect waves-teal btn-flat left-align"
           style={ btnStyle }
         >
           <i className="material-icons">reply</i>
-        </a>
+        </Link>
 
         {/* form */}
         <form className="col s12">
@@ -187,3 +174,12 @@ export default class EditModal extends React.Component {
     );
   }
 }
+EditModal.contextTypes = {
+  router: React.PropTypes.object
+};
+
+EditModal.propTypes = {
+  modalDisplay: PropTypes.object,
+  onModalEdit: PropTypes.func,
+};
+export default connect(null, { onModalEdit })(EditModal);
