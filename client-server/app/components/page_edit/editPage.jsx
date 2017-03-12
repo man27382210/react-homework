@@ -3,7 +3,7 @@ import EditModal from './editModal.jsx';
 import { connect } from 'react-redux';
 import Constant from 'common/constant';
 
-class EditPage extends React.Component {
+export class EditPage extends React.Component {
   constructor() {
     super();
     this.checkValidPage = this.checkValidPage.bind(this);
@@ -17,7 +17,7 @@ class EditPage extends React.Component {
       }
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     /*
      * the component is going to render that means elementList has been loaded.
      * so it is unnecessary to check if elementList has been fininshed loading or not.
@@ -26,16 +26,9 @@ class EditPage extends React.Component {
   }
   checkValidPage() {
     // if the index element are not exsit or any other error.
-    return new Promise((resolve, reject) => {
+    try {
       const element = this.props.elementList[this.context.router.params.index - 1];
       if (element) {
-        resolve(element);
-      } else {
-        reject('404');
-      }
-    })
-      .then((element) => {
-        // set state
         this.setState({
           modalDisplay: {
             ...element,
@@ -43,10 +36,12 @@ class EditPage extends React.Component {
             index: this.context.router.params.index - 1,
           }
         });
-      })
-      .catch(() => {
-        this.context.router.replace('/NotFound');
-      });
+      } else {
+        throw new Error(404);
+      }
+    } catch (e) {
+      this.context.router.replace('/NotFound');
+    }
   }
   render() {
     const style = {
