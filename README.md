@@ -1,5 +1,5 @@
 # Todo List sample 
-[![Build Status](https://travis-ci.org/Chun-MingChen/react-homework.svg?branch=feature/step3-docker-mongo-redux-saga)](https://travis-ci.org/Chun-MingChen/react-homework)
+[![Build Status](https://travis-ci.org/Chun-MingChen/react-homework.svg?branch=feature/step4-react-router)](https://travis-ci.org/Chun-MingChen/react-homework)
 
 > This is an todoList example built with ```React``` and  ```Redux``` to construct and display view in ```client-server```.
 > On the other hand, in back-end ```api-server```, it handles all Restful requests and data depending on ```Node.js```, ```Express``` and ```mongo```.
@@ -46,16 +46,18 @@ Now, there are two ways to boost the servers, one is running with ```docker ```,
 
 ### 2. With ur local ```Node``` and ```MongoDB```
 1. First of All, you have to install all ```node_modules``` in root and the ```servers``` generally.
+
    ```sh
    npm i
    npm run install:all
    ```
+
 2. make sure ```mongo``` is boosting and listening on port ```27017```.
 3. The simplest way to start and monitor ```client-server``` and ```api-server``` is using the following.
+
    ```sh
    npm run serve:all
    ```
-
 ## Usage about Docker 
 ### Enter container 
 ```sh

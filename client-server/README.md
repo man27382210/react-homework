@@ -1,5 +1,5 @@
 # Client Server [![Build Status](https://travis-ci.org/Chun-MingChen/react-homework.svg?branch=feature/step2-redux)](https://travis-ci.org/Chun-MingChen/react-homework)
-> It's a to-do list example based on react, redux, webpack.
+> It's a to-do list example based on react, redux, react-router and webpack.
 
 ## Basics
 ### Prerequisite
@@ -8,6 +8,8 @@
 ### Feature
 * [Materialize](https://github.com/Dogfalo/materialize)
 : A modern responsive front-end framework based on Material Design
+* [csspin](https://github.com/webkul/csspin)
+: CSS Spinners and Loaders
 
 ## Getting started
 
