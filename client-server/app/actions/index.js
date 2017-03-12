@@ -31,12 +31,6 @@ export function onModalEdit(element) {
   });
 }
 
-export function onElementItemEdit(element) {
-  return ({
-    type: Constant.ON_ELEMENT_ITEM_EDIT,
-    payload: element,
-  });
-}
 export function onElementItemDelete(element) {
   return ({
     type: Constant.ON_ELEMENT_ITEM_DELETE,
