@@ -1,5 +1,5 @@
-import reducer from '../../app/reducers/elementList';
-import Constant from '../../app/common/constant';
+import reducer from 'reducers/elementList';
+import Constant from 'common/constant';
 import { expect } from 'chai';
 
 const defaultValue = [];
