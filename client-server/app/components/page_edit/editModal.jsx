@@ -88,12 +88,12 @@ export class EditModal extends React.Component {
               <input
                 id="edit-modal-owner"
                 type="text"
-                className="validate dynamic-display"
+                className={'validate ' + (this.state.owner.length > 0 ? 'valid' : '')}
                 name="owner"
                 onChange={this.onFormChange}
                 value={this.state.owner}
               />
-              <label className="dynamic-display">Owner name</label>
+              <label className={this.state.owner.length > 0 ? 'active' : ''}>Owner name</label>
             </div>
           </div>
 
@@ -102,23 +102,23 @@ export class EditModal extends React.Component {
               <input
                 id="edit-modal-title"
                 type="text"
-                className="validate dynamic-display"
+                className={'validate ' + (this.state.title.length > 0 ? 'valid' : '')}
                 onChange={this.onFormChange}
                 value={this.state.title}
                 name="title"
               />
-              <label className="dynamic-display">Title</label>
+              <label className={this.state.title.length > 0 ? 'active' : ''}>Title</label>
             </div>
             <div className="input-field col s6">
               <input
                 id="edit-modal-category"
                 type="text"
-                className="validate dynamic-display"
+                className={'validate ' + (this.state.category.length > 0 ? 'valid' : '')}
                 onChange={this.onFormChange}
                 value={this.state.category}
                 name="category"
               />
-              <label className="dynamic-display">category </label>
+              <label className={this.state.category.length > 0 ? 'active' : ''}>Category</label>
             </div>
           </div>
 
