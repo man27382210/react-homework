@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Wed Feb 15 2017 23:34:01 GMT+0800 (CST)
+const path = require('path');
 
 module.exports = function(config) {
   config.set({
@@ -35,6 +36,11 @@ module.exports = function(config) {
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true
+      },
+      resolve: {
+        root: [
+          path.resolve(__dirname, './app'),
+        ],
       }
     },
     webpackMiddleware: {
