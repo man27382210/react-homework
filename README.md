@@ -46,12 +46,15 @@ Now, there are two ways to boost the servers, one is running with ```docker ```,
 
 ### 2. With ur local ```Node``` and ```MongoDB```
 1. First of All, you have to install all ```node_modules``` in root and the ```servers``` generally.
+
    ```sh
    npm i
    npm run install:all
    ```
 2. make sure ```mongo``` is boosting and listening on port ```27017```.
+
 3. The simplest way to start and monitor ```client-server``` and ```api-server``` is using the following.
+
    ```sh
    npm run serve:all
    ```
