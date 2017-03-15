@@ -40,6 +40,7 @@ module.exports = function(config) {
       resolve: {
         root: [
           path.resolve(__dirname, './app'),
+          path.resolve('./test'),
         ],
       }
     },

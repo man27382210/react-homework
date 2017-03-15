@@ -47,6 +47,7 @@ module.exports = {
   resolve: {
     root: [
       path.resolve('./app'),
+      path.resolve('./test'),
     ],
   }
 };
