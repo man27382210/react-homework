@@ -6,6 +6,7 @@ import { EditModal } from 'components/page_edit/editModal.jsx';
 import { Link } from 'react-router';
 import { Input } from 'react-materialize';
 import Constant from 'common/constant';
+import mockRouterContext from 'helpers/mockRouterContext';
 
 // the following are mock data.
 const mockElement = {
@@ -22,7 +23,10 @@ function setup() {
     modalDisplay: mockElement,
     onModalEdit: sinon.spy(),
   };
-  return mount(<EditModal {...props} />);
+  const context = {
+    router: mockRouterContext
+  };
+  return mount(<EditModal {...props} />, { context });
 }
 
 /*
@@ -31,7 +35,6 @@ function setup() {
  * 2. componentWillReceiveProps
  * 3. onFormChange
  * 4. onSubmit
- * 5. checkValueExist
  */
 describe('<EditModal />', () => {
   describe('#render', () => {
@@ -63,7 +66,7 @@ describe('<EditModal />', () => {
     });
   });
 
-  describe('componentWillReceiveProps', () => {
+  describe('#componentWillReceiveProps', () => {
     it('receive central state and set local state', () => {
       const enzymeWrapper = setup();
       const mockModalValue = {
@@ -124,6 +127,32 @@ describe('<EditModal />', () => {
         input.node.value = Constant.PRIORITY_IMPORTANT;
         input.simulate('change', input);
         expect(enzymeWrapper.state('priority')).to.equals(Constant.PRIORITY_IMPORTANT);
+      });
+    });
+  });
+
+  describe('#onSubmit', () => {
+    let enzymeWrapper;
+    beforeEach(() => {
+      enzymeWrapper = setup();
+    });
+
+    describe('if Btn Submit was clicked ', () => {
+      describe('when field was not empty', () => {
+        it('method onModalEdit should called once', () => {
+          const submitBtn = enzymeWrapper.find('#edit-modal-submit').find('button');
+          submitBtn.simulate('click');
+          expect(enzymeWrapper.props().onModalEdit.called).to.be.true;
+        });
+      });
+      describe('when field was empty', () => {
+        it('method onModalEdit should not be called ', () => {
+          const submitBtn = enzymeWrapper.find('#edit-modal-submit').find('button');
+
+          enzymeWrapper.setState({category: ''});
+          submitBtn.simulate('click');
+          expect(enzymeWrapper.props().onModalEdit.called).to.be.false;
+        });
       });
     });
   });
