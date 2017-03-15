@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { EditPage } from 'components/page_edit/editPage.jsx';
+import mockRouterContext from 'helpers/mockRouterContext';
 
 /* testing milestone
  * 1. componentDidMount
@@ -23,7 +24,6 @@ const mockElementListCount = 5;
 const mockElementList = Array.apply(null, new Array(mockElementListCount)).map(() => {
   return mockElementListItem;
 });
-const mockRouterReplace = sinon.spy();
 
 // enzymeWrapper setup
 function setup(url) {
@@ -32,10 +32,10 @@ function setup(url) {
   };
   const context = {
     router: {
+      ...mockRouterContext,
       params: {
         index: url
-      },
-      replace: mockRouterReplace
+      }
     }
   };
   return mount(<EditPage {...props} />, { context});
