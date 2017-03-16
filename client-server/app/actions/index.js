@@ -1,5 +1,10 @@
 import Constant from '../common/constant';
 
+export function onElementListInit() {
+  return ({
+    type: Constant.ON_ELEMENT_LIST_INIT,
+  });
+}
 export function onCreateFormSubmit(element) {
   // send post api to api server and save element to DB
 

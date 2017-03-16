@@ -1,22 +1,16 @@
 import constant from '../common/constant';
 
-const defaultValue = [{
-  category: 'cat1',
-  title: 'title',
-  owner: 'Nick',
-  status: 'Open',
-  priority: 'Emergency',
-}];
+const defaultValue = [];
 
 export default (state =  defaultValue, action) => {
   let newArray = [];
   let index;
   switch (action.type) {
-  case constant.ON_CREATE_FORM_SUBMIT:
+  case constant.ON_CREATE_FORM_SUBMIT_SUCCEEDED:
     newArray = [...state];
     newArray.push(action.payload);
     return (newArray);
-  case constant.ON_MODAL_EDIT:
+  case constant.ON_MODAL_EDIT_SUCCEEDED:
     // edit element according to index
     index = action.payload.index;
     const editedElement = {...action.payload};
@@ -26,7 +20,7 @@ export default (state =  defaultValue, action) => {
     newArray = [...state];
     newArray[index] = editedElement;
     return (newArray);
-  case constant.ON_ELEMENT_ITEM_DELETE:
+  case constant.ON_ELEMENT_ITEM_DELETE_SUCCEEDED:
     index = action.payload.index;
 
     // remove element with specific index
@@ -34,6 +28,9 @@ export default (state =  defaultValue, action) => {
       return (i !== index);
     });
     return newArray;
+  case constant.ELEMENT_LIST_FETCH_SUCCEEDED:
+    newArray = [...defaultValue, ...action.payload];
+    return (newArray);
   default:
     return state;
   }

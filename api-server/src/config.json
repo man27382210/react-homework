@@ -1,5 +1,7 @@
 {
 	"port": 8080,
 	"bodyLimit": "100kb",
-	"corsHeaders": ["Link"]
+	"corsHeaders": ["Link"],
+	"mongodbUrl": "mongodb://127.0.0.1:27017/todoElements",
+	"TESTING_ENV": "testing"
 }
