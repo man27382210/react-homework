@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { onElementItemDelete } from 'actions';
+import { onElementItemDelete } from '../../actions';
 
 export class ElementListItem extends Component {
   constructor(props) {

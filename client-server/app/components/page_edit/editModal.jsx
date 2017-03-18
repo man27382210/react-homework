@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
 import { Link } from 'react-router';
-import Constant from 'common/constant';
-import { onModalEdit } from 'actions';
+import Constant from '../../common/constant';
+import { onModalEdit } from '../../actions';
 
 export class EditModal extends React.Component {
   constructor(props) {
