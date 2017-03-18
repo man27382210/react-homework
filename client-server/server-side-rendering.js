@@ -1,7 +1,9 @@
-import path from 'path';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import PageIndex from './app/components/common/notFound.jsx';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './app/reducers/';
+import PageIndex from './app/components/page_index/index.jsx';
 
 function renderFullPage(html) {
   return (`
@@ -35,6 +37,13 @@ function renderFullPage(html) {
 
 
 module.exports = (req, res) => {
-  const page = renderFullPage('');
+  // Create a new Redux store instance
+  const store = createStore(reducers);
+  const html = renderToStaticMarkup(
+    <Provider store={store}>
+      <PageIndex />
+    </Provider>
+  );
+  const page = renderFullPage(html);
   res.send(page);
 };
