@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Link } from 'react-router';
 import { ElementListItem } from 'components/page_index/elementListItem.jsx';
+import mockRouterContext from 'helpers/mockRouterContext';
 
 const mockElementListItem = {
   sequenceNumber: 0,
@@ -18,8 +19,12 @@ function setup() {
     element: mockElementListItem,
     index: 0,
   };
-  const enzymeWrapper = shallow(<ElementListItem {...props} />);
-  return enzymeWrapper;
+  const context = {
+    router: {
+      ...mockRouterContext,
+    }
+  };
+  return shallow(<ElementListItem {...props} />, { context});
 }
 
 describe('<ElementListItem />', () => {
@@ -60,14 +65,6 @@ describe('<ElementListItem />', () => {
     it('should render btn#Delete correctly', () => {
       const enzymeWrapper = setup();
       expect(enzymeWrapper.find('td a').at(0).hasClass('red')).to.be.true;
-    });
-  });
-  describe('when Edit btn was click', () => {
-    xit('onEditBtnClick should be called once', () => {
-      sinon.stub(ElementListItem.prototype, 'onEditBtnClick');
-      const enzymeWrapper = setup();
-      enzymeWrapper.find('td a').at(0).simulate('click');
-      expect(ElementListItem.prototype.onEditBtnClick.calledOnce).to.equal(true);
     });
   });
   describe('when Delete btn was click', () => {
