@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { onElementListInit, onInitLoadingFinish } from 'actions';
-import LoadingAnimation from 'components/common/loadingAnimation.jsx';
+import { onElementListInit, onInitLoadingFinish } from '../actions';
+import LoadingAnimation from './common/loadingAnimation.jsx';
 const ANIMATION_STAY_SECOND = 0.8;
 class App extends React.Component {
 
