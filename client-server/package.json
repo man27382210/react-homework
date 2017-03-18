@@ -21,7 +21,7 @@
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "test:dev": "./node_modules/.bin/karma start --auto-watch",
-    "dev": "node server",
+    "dev": "./node_modules/.bin/nodemon server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
     "jscs": "jscs ."
@@ -69,6 +69,7 @@
     "karma-webpack": "^2.0.2",
     "mocha": "^2.3.3",
     "mocha-jsdom": "^1.0.0",
+    "nodemon": "^1.11.0",
     "postcss-loader": "^0.6.0",
     "react-addons-test-utils": "^15.4.2",
     "react-transform-hmr": "^1.0.0",
