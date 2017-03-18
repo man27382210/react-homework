@@ -1,4 +1,4 @@
-# Client Server [![Build Status](https://travis-ci.org/Chun-MingChen/react-homework.svg?branch=feature/step2-redux)](https://travis-ci.org/Chun-MingChen/react-homework)
+# Client Server
 > It's a to-do list example based on react, redux, react-router and webpack.
 
 ## Basics
@@ -41,3 +41,4 @@ npm test
 
 ## Reference
 * [test-with-connected-components](https://github.com/reactjs/redux/blob/master/docs/recipes/WritingTests.md#connected-components)
+* [React Router Testing](https://github.com/ReactTraining/react-router/blob/57543eb41ce45b994a29792d77c86cc10b51eac9/docs/guides/testing.md)
