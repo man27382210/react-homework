@@ -12,7 +12,7 @@ const config = require('./webpack.config.js');
 const serverSideRendering = require('./server-side-rendering');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 3000 : process.env.PORT;
+const port = process.env.PORT || 3000;
 const app = express();
 
 // providing static file in public folder.
@@ -39,6 +39,7 @@ if (isDeveloping) {
   app.get('*', serverSideRendering);
 } else {
   app.use(express.static(__dirname + '/dist'));
+  app.get('*', serverSideRendering);
 }
 
 app.listen(port, '0.0.0.0', function onStart(err) {
