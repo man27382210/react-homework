@@ -36,11 +36,17 @@ function renderFullPage(html) {
   `);
 }
 
+// Compile an initial state
+function preloadingState() {
+  return new Promise((resolve) => {
+    // return initial state
+    resolve({
+      loadingFinished: true,
+    });
+  });
+}
 
 module.exports = (req, res) => {
-  // Create a new Redux store instance
-  const store = createStore(reducers);
-
   // SSR for react-router
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -48,13 +54,24 @@ module.exports = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const html = renderToStaticMarkup(
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      );
-      const page = renderFullPage(html);
-      res.status(200).send(page);
+      preloadingState().
+        then((preloadedState) => {
+          // Create a new Redux store instance
+          const store = createStore(reducers, preloadedState);
+          return store;
+        })
+        .then((store) => {
+          // Render the component to a string
+          const html = renderToStaticMarkup(
+            <Provider store={store}>
+              <RouterContext {...renderProps} />
+            </Provider>
+          );
+
+          // return page and status OK
+          const page = renderFullPage(html);
+          res.status(200).send(page);
+        });
     } else {
       res.status(404).send('Not found');
     }

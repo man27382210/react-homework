@@ -5,11 +5,15 @@ import LoadingAnimation from './common/loadingAnimation.jsx';
 const ANIMATION_STAY_SECOND = 0.8;
 class App extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.Init = this.Init.bind(this);
+
+    // skip loading animation when server-side rendering,
+    // otherwise, loading animation will persist at least 0.8 seconds.
+    const serverSideRendering = props.loadingFinished || false;
     this.state = {
-      finishDelay: false,
+      finishDelay: serverSideRendering,
     };
   }
   componentDidMount() {
