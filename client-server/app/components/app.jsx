@@ -9,11 +9,23 @@ class App extends React.Component {
     super(props);
     this.Init = this.Init.bind(this);
 
+    // when the final route match '*', it means catch component NotFound
+    const routePath = props.routes[props.routes.length - 1].path;
+    let pageNotFound;
+    if (routePath) {
+      pageNotFound = routePath.match(/\*/) ? true : false;
+    } else {
+      pageNotFound = false;
+    }
+
     // skip loading animation when server-side rendering,
     // otherwise, loading animation will persist at least 0.8 seconds.
     const serverSideRendering = props.loadingFinished || false;
+
+    // set local state
     this.state = {
       finishDelay: serverSideRendering,
+      pageNotFound,
     };
   }
   componentDidMount() {
@@ -41,7 +53,12 @@ class App extends React.Component {
     this.props.onElementListInit();
   }
   render() {
-    if (this.state.finishDelay && this.props.loadingFinished) {
+    /*
+     * situations to skip loading animation
+     * 1. server-side rendering
+     * 2. component is NotFound
+    */
+    if (this.state.finishDelay && this.props.loadingFinished || this.state.pageNotFound) {
       return (
         <div>
           {this.props.children}
@@ -60,6 +77,7 @@ App.propTypes = {
   loadingFinished: PropTypes.bool,
   onInitLoadingFinish: PropTypes.func,
   children: React.PropTypes.element.isRequired,
+  routes: React.PropTypes.array,
 };
 
 function mapStateToProps(state) {
