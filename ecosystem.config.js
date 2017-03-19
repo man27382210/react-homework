@@ -3,7 +3,8 @@ module.exports = {
     // First application
     {
       name: "client-server",
-      script: "server.js",
+      script: "npm",
+      args: 'start',
       watch: false,
       cwd: './client-server/'
     },

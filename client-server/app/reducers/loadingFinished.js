@@ -1,15 +1,9 @@
 import Constant from '../common/constant';
-const INIT_STATE = {
-  category: 'cat1',
-  title: 'title',
-  owner: 'Nick',
-  status: 'Open',
-  priority: 'Emergency',
-};
+const INIT_STATE = false;
 
 export default (state = INIT_STATE, action) => {
   switch (action.type) {
-  case Constant.ON_ELEMENT_ITEM_EDIT:
+  case Constant.ON_INIT_LOADING_FINISHED:
     return action.payload;
   default:
     return state;

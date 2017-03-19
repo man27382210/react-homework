@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { ElementListItem } from '../../app/components/elementListItem.jsx';
+import { Link } from 'react-router';
+import { ElementListItem } from 'components/page_index/elementListItem.jsx';
+import mockRouterContext from 'helpers/mockRouterContext';
 
 const mockElementListItem = {
   sequenceNumber: 0,
@@ -17,8 +19,12 @@ function setup() {
     element: mockElementListItem,
     index: 0,
   };
-  const enzymeWrapper = shallow(<ElementListItem {...props} />);
-  return enzymeWrapper;
+  const context = {
+    router: {
+      ...mockRouterContext,
+    }
+  };
+  return shallow(<ElementListItem {...props} />, { context});
 }
 
 describe('<ElementListItem />', () => {
@@ -54,26 +60,18 @@ describe('<ElementListItem />', () => {
     });
     it('should render btn#Edit correctly', () => {
       const enzymeWrapper = setup();
-      expect(enzymeWrapper.find('td a').at(0).hasClass('indigo')).to.be.true;
+      expect(enzymeWrapper.find(Link).at(0).hasClass('indigo')).to.be.true;
     });
     it('should render btn#Delete correctly', () => {
       const enzymeWrapper = setup();
-      expect(enzymeWrapper.find('td a').at(1).hasClass('red')).to.be.true;
-    });
-  });
-  describe('when Edit btn was click', () => {
-    it('onEditBtnClick should be called once', () => {
-      sinon.stub(ElementListItem.prototype, 'onEditBtnClick');
-      const enzymeWrapper = setup();
-      enzymeWrapper.find('td a').at(0).simulate('click');
-      expect(ElementListItem.prototype.onEditBtnClick.calledOnce).to.equal(true);
+      expect(enzymeWrapper.find('td a').at(0).hasClass('red')).to.be.true;
     });
   });
   describe('when Delete btn was click', () => {
     it('onDeleteBtnClick should be called once', () => {
       sinon.stub(ElementListItem.prototype, 'onDeleteBtnClick');
       const enzymeWrapper = setup();
-      enzymeWrapper.find('td a').at(1).simulate('click');
+      enzymeWrapper.find('td a').at(0).simulate('click');
       expect(ElementListItem.prototype.onDeleteBtnClick.calledOnce).to.equal(true);
     });
   });

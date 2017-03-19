@@ -1,5 +1,11 @@
 import Constant from '../common/constant';
 
+export function onInitLoadingFinish(value) {
+  return ({
+    type: Constant.ON_INIT_LOADING_FINISHED,
+    payload: value,
+  });
+}
 export function onElementListInit() {
   return ({
     type: Constant.ON_ELEMENT_LIST_INIT,
@@ -25,12 +31,6 @@ export function onModalEdit(element) {
   });
 }
 
-export function onElementItemEdit(element) {
-  return ({
-    type: Constant.ON_ELEMENT_ITEM_EDIT,
-    payload: element,
-  });
-}
 export function onElementItemDelete(element) {
   return ({
     type: Constant.ON_ELEMENT_ITEM_DELETE,

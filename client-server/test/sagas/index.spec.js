@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import * as Api from '../../app/sagas/api';
+import * as Api from 'sagas/api';
 import { call, put } from 'redux-saga/effects';
 import 'babel-polyfill';
-import * as saga from '../../app/sagas/';
-import Constant from '../../app/common/constant';
+import * as saga from 'sagas/';
+import Constant from 'common/constant';
 
 const mockElement = {
   category: 'mockCategory',

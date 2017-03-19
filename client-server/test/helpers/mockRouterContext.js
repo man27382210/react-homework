@@ -1,0 +1,21 @@
+import sinon from 'sinon';
+export default {
+  reateHref: sinon.stub(),
+  createHref: sinon.stub(),
+  createKey: sinon.stub(),
+  createLocation: sinon.stub(),
+  createPath: sinon.stub(),
+  getCurrentLocation: sinon.stub(),
+  go: sinon.stub(),
+  goBack: sinon.stub(),
+  goForward: sinon.stub(),
+  isActive: sinon.stub(),
+  listen: sinon.stub(),
+  listenBefore: sinon.stub(),
+  location: sinon.stub(),
+  push: sinon.stub(),
+  replace: sinon.stub(),
+  routes: sinon.stub(),
+  setRouteLeaveHook: sinon.stub(),
+  transitionTo: sinon.stub(),
+};
