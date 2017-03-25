@@ -23,12 +23,6 @@ function renderFullPage(html) {
     </head>
     <body>
       <div id="root">${html}</div>
-      <script >
-        $(document).ready(function() {
-          $('select').material_select();
-          $('.modal').modal();
-        });
-      </script>
       <script src="/js/materialize.min.js"></script>
       <script src="/main.js"></script>
     </body>
