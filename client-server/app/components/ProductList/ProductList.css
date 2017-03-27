@@ -1,0 +1,13 @@
+.vertical_middle {
+  vertical-align: middle !important;
+}
+
+.number {
+  vertical-align: middle !important;
+  text-align: right;
+}
+
+.status {
+  vertical-align: middle !important;
+  text-align: center;
+}
