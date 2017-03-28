@@ -1,9 +1,20 @@
 import React from 'react';
-import styles from './ProductList.css';
+import ProductItem from './ProductItem';
 
-const ProductList = () => {
+const renderProductList = (products) => (
+  products.map((product) => {
+    return (
+      <ProductItem
+        key={product.id}
+        product={product}
+      />
+    );
+  })
+);
+
+const ProductList = (props) => {
   return (
-    <div className={styles.text_center}>
+    <div>
       <table className="table">
         <thead>
           <tr>
@@ -17,40 +28,15 @@ const ProductList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <figure className="image is-64x64">
-                <img src="http://bulma.io/images/placeholders/64x64.png" />
-              </figure>
-            </td>
-            <td className={styles.vertical_middle}>Audi R8</td>
-            <td className={styles.vertical_middle}>Car</td>
-            <td className={styles.number}>12,000</td>
-            <td className={styles.number}>3</td>
-            <td className={styles.status}><span className="tag is-success">Publish</span></td>
-            <td className={styles.vertical_middle}>
-              <div className="field is-grouped">
-                <p className="control">
-                  <a className="button is-info is-outlined">
-                    <span className="icon">
-                      <i className="fa fa-pencil"></i>
-                    </span>
-                  </a>
-                </p>
-                <p className="control">
-                  <a className="button is-danger is-outlined">
-                    <span className="icon">
-                      <i className="fa fa-trash-o"></i>
-                    </span>
-                  </a>
-                </p>
-              </div>
-            </td>
-          </tr>
+          {renderProductList(props.products)}
         </tbody>
       </table>
     </div>
   );
+};
+
+ProductList.propTypes = {
+  products: React.PropTypes.array
 };
 
 export default ProductList;

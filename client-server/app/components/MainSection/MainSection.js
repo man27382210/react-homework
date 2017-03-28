@@ -2,7 +2,7 @@ import React from 'react';
 import ProductForm from '../ProductForm';
 import ProductList from '../ProductList';
 
-const MainSection = () => {
+const MainSection = (props) => {
   return (
     <section className="hero is-fullheight is-dark is-bold">
       <div className="hero-body">
@@ -15,7 +15,9 @@ const MainSection = () => {
               <div className="box">
                 <ProductForm />
                 <hr />
-                <ProductList />
+                <ProductList
+                  products={props.products}
+                />
               </div>
             </div>
           </div>
@@ -23,6 +25,10 @@ const MainSection = () => {
       </div>
     </section>
   );
+};
+
+MainSection.propTypes = {
+  products: React.PropTypes.array
 };
 
 export default MainSection;

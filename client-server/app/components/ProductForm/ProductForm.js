@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import CategorySelect from '../Common/CategorySelect';
+import StatusSelect from '../Common/StatusSelect';
 
 class ProductForm extends Component {
   constructor(props) {
@@ -19,20 +21,7 @@ class ProductForm extends Component {
             <label className="label">Category</label>
             <p className="control">
               <span className="select is-fullwidth">
-                <select>
-                  <option>Select category</option>
-                  <option>Sports & Outdoors</option>
-                  <option>Kids & Baby</option>
-                  <option>Shoes</option>
-                  <option>Bags & Accessories</option>
-                  <option>Beauty & Health</option>
-                  <option>Clothing</option>
-                  <option>Food & Drinks</option>
-                  <option>Toys & Hobbies</option>
-                  <option>Electronics</option>
-                  <option>Cars & Motorcycles</option>
-                  <option>Others</option>
-                </select>
+                <CategorySelect />
               </span>
             </p>
           </div>
@@ -52,10 +41,7 @@ class ProductForm extends Component {
             <label className="label">Status</label>
             <p className="control">
               <span className="select is-fullwidth">
-                <select>
-                  <option>Publish</option>
-                  <option>Draft</option>
-                </select>
+                <StatusSelect />
               </span>
             </p>
           </div>
