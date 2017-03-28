@@ -27,6 +27,7 @@ if (isDeveloping) {
   });
 
   app.use(middleware);
+  app.use(express.static(__dirname + '/app/public'));
   app.use(webpackHotMiddleware(compiler));
   app.get('*', function response(req, res) {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
