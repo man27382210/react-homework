@@ -1,7 +1,14 @@
 version: '2'
 services:
+  api:
+    build: ./api-server
+    volumes:
+      - ./api-server:/usr/src/api-server
+      - /usr/src/api-server/node_modules
+    ports:
+      - "8080:8080"
   web:
-    build: .
+    build: ./client-server
     volumes:
       - ./client-server:/usr/src/client-server
       - /usr/src/client-server/node_modules
