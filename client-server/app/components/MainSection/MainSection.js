@@ -3,6 +3,7 @@ import ProductForm from '../ProductForm';
 import ProductList from '../ProductList';
 
 const MainSection = (props) => {
+  const { products, actions } = props;
   return (
     <section className="hero is-fullheight is-dark is-bold">
       <div className="hero-body">
@@ -13,11 +14,16 @@ const MainSection = (props) => {
                 Product Management System
               </h1>
               <div className="box">
-                <ProductForm />
-                <hr />
-                <ProductList
-                  products={props.products}
+                <ProductForm
+                  addProdcut={actions.addProdcut}
                 />
+                {products.length > 0
+                  &&
+                  <div>
+                    <hr />
+                    <ProductList {...props} />
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -28,7 +34,8 @@ const MainSection = (props) => {
 };
 
 MainSection.propTypes = {
-  products: React.PropTypes.array
+  products: React.PropTypes.array.isRequired,
+  actions: React.PropTypes.object.isRequired
 };
 
 export default MainSection;
