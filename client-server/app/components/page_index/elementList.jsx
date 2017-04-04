@@ -1,16 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ElementListItem from './elementListItem.jsx';
-import { onElementListInit } from '../actions/';
 
 
 export class ElementList extends Component {
   constructor() {
     super();
-  }
-  componentDidMount() {
-    // ask for todoElementList from here
-    this.props.onElementListInit();
   }
   render() {
     const style = {
@@ -63,4 +58,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { onElementListInit })(ElementList);
+export default connect(mapStateToProps)(ElementList);

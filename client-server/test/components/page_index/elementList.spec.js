@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { ElementList } from '../../app/components/elementList.jsx';
-import ElementListItem from '../../app/components/elementListItem.jsx';
+import { ElementList } from 'components/page_index/elementList.jsx';
+import ElementListItem from 'components/page_index/elementListItem.jsx';
 
 const mockElementListItem = {
   category: 'cat1',

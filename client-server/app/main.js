@@ -4,10 +4,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import 'babel-polyfill';
 import createSagaMiddleware from 'redux-saga';
+import { Router, browserHistory} from 'react-router';
 
-import App from './components/index.jsx';
 import reducers from './reducers';
 import rootSaga from './sagas/';
+import routes from './routes/index.js';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -23,6 +24,6 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory} routes={routes} />
   </Provider>, document.getElementById('root')
 );

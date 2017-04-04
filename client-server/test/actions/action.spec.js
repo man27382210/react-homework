@@ -1,5 +1,5 @@
-import * as actions from '../../app/actions';
-import Constant from '../../app/common/constant';
+import * as actions from 'actions';
+import Constant from 'common/constant';
 import { expect } from 'chai';
 
 const mockElement = {
@@ -36,15 +36,6 @@ describe('actions', () => {
         payload: mockElement
       };
       expect(actions.onModalEdit(mockElement)).to.deep.equal(expectedAction);
-    });
-  });
-  describe('#onElementItemEdit', () => {
-    it('should create an action when element item has been edited', ()=> {
-      const expectedAction = {
-        type: Constant.ON_ELEMENT_ITEM_EDIT,
-        payload: mockElement
-      };
-      expect(actions.onElementItemEdit(mockElement)).to.deep.equal(expectedAction);
     });
   });
   describe('#onElementItemDelete', () => {

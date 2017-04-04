@@ -43,5 +43,11 @@ module.exports = {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }]
+  },
+  resolve: {
+    root: [
+      path.resolve('./app'),
+      path.resolve('./test'),
+    ],
   }
 };
