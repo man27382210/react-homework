@@ -14,7 +14,7 @@ const ConfirmModal = (props) => {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Are you sure?</p>
+          <p className="modal-card-title">Are you sure you want to delete this product?</p>
           <button className="delete" onClick={closeModal}></button>
         </header>
         <section className="modal-card-body">

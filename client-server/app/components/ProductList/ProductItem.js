@@ -21,7 +21,7 @@ const ProductItem = (props) => {
       <td className={styles.vertical_middle}>
         <div className="field is-grouped">
           <p className="control">
-            <a className="button is-info is-outlined">
+            <a className="button is-info is-outlined" onClick={() => showModal(MODAL.EDIT_MODAL, product.id)}>
               <span className="icon">
                 <i className="fa fa-pencil"></i>
               </span>

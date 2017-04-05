@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductForm from '../ProductForm';
 import ProductList from '../ProductList';
+import EditModal from '../Modal/EditModal';
 import ComfirmModal from '../Modal/ComfirmModal';
 import { MODAL } from '../../constants/ModalNames';
 
@@ -51,7 +52,7 @@ class MainSection extends React.Component {
                   </h1>
                   <div className="box">
                     <ProductForm
-                      addProdcut={actions.addProdcut}
+                      updateProdcut={actions.addProdcut}
                     />
                     {products.length > 0
                       &&
@@ -66,6 +67,12 @@ class MainSection extends React.Component {
             </div>
           </div>
         </section>
+        <EditModal
+          isShown={modalDisplay.modal === MODAL.EDIT_MODAL}
+          product={this.findProductById(modalDisplay.itemId)}
+          editProdcut={actions.editProdcut}
+          closeModal={actions.closeModal}
+        />
         <ComfirmModal
           isShown={modalDisplay.modal === MODAL.COMFIRM_MODAL}
           product={this.findProductById(modalDisplay.itemId)}

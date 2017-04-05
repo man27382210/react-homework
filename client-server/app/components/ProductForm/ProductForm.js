@@ -27,8 +27,11 @@ const INIT_FIELDS_STATE = {
 class ProductForm extends Component {
   constructor(props) {
     super(props);
+    // verfify is add a new product or edit as exist product
+    const isEdit = props.product ? true : false;
     this.state = {
-      fields: INIT_FIELDS_STATE,
+      isEdit: isEdit,
+      fields: isEdit ? props.product : INIT_FIELDS_STATE,
       errors: {}
     };
     this.handleChange = this.handleChange.bind(this);
@@ -85,13 +88,18 @@ class ProductForm extends Component {
       }
     }
     if (Object.keys(state.errors).length !== 0) return;
-    this.props.addProdcut(state.fields);
+    this.props.updateProdcut(state.fields);
+
+    if (state.isEdit) {
+      this.props.closeModal();
+      return;
+    }
     this.setState({ fields: INIT_FIELDS_STATE });
   }
 
   render() {
     const { handleChange, onSubmit } = this;
-    const { errors } = this.state;
+    const { isEdit, errors } = this.state;
     const { name, category, price, inStock, status, imageUrl } = this.state.fields;
     return (
       <form onSubmit={onSubmit}>
@@ -187,7 +195,7 @@ class ProductForm extends Component {
             type="submit"
             disabled={Object.keys(errors).length !== 0}
           >
-            Add Product
+            {isEdit ? 'Save changes' : 'Add Product'}
           </button>
         </p>
       </form>
@@ -196,7 +204,9 @@ class ProductForm extends Component {
 }
 
 ProductForm.propTypes = {
-  addProdcut: React.PropTypes.func.isRequired
+  updateProdcut: React.PropTypes.func.isRequired,
+  product: React.PropTypes.object,
+  closeModal: React.PropTypes.func
 };
 
 export default ProductForm;
