@@ -9,8 +9,10 @@ const ProductItem = (props) => {
   return (
     <tr>
       <td>
-        <figure className="image is-64x64">
-          <img src={product.imageUrl} />
+        <figure className="image is-4by3">
+          <a onClick={() => showModal(MODAL.IMAGE_MODAL, product.id)}>
+            <img src={product.imageUrl} />
+          </a>
         </figure>
       </td>
       <td className={styles.vertical_middle}>{product.name}</td>

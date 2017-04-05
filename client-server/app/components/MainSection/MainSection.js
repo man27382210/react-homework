@@ -1,8 +1,11 @@
 import React from 'react';
 import ProductForm from '../ProductForm';
 import ProductList from '../ProductList';
+
 import EditModal from '../Modal/EditModal';
 import ComfirmModal from '../Modal/ComfirmModal';
+import ImageModal from '../Modal/ImageModal';
+
 import { MODAL } from '../../constants/ModalNames';
 
 const ESCAPE_KEY = 27;
@@ -67,6 +70,11 @@ class MainSection extends React.Component {
             </div>
           </div>
         </section>
+        <ImageModal
+          isShown={modalDisplay.modal === MODAL.IMAGE_MODAL}
+          imageUrl={this.findProductById(modalDisplay.itemId).imageUrl}
+          closeModal={actions.closeModal}
+        />
         <EditModal
           isShown={modalDisplay.modal === MODAL.EDIT_MODAL}
           product={this.findProductById(modalDisplay.itemId)}
