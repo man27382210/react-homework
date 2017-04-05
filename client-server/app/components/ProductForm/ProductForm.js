@@ -94,7 +94,7 @@ class ProductForm extends Component {
     const { errors } = this.state;
     const { name, category, price, inStock, status, imageUrl } = this.state.fields;
     return (
-      <form onSubmit={onSubmit.bind(this)}>
+      <form onSubmit={onSubmit}>
         <div className="columns is-multiline">
           <div className="column is-8">
             <label className="label">Product Name</label>

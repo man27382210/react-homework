@@ -1,18 +1,18 @@
 import React from 'react';
 import ProductItem from './ProductItem';
 
-const renderProductList = (products) => (
-  products.map((product) => {
-    return (
-      <ProductItem
-        key={product.id}
-        product={product}
-      />
-    );
-  })
-);
+const renderProductList = (products, actions) => {
+  return products.map((product) => (
+    <ProductItem
+      key={product.id}
+      product={product}
+      {...actions}
+    />
+  ));
+};
 
 const ProductList = (props) => {
+  const { products, actions } = props;
   return (
     <div>
       <table className="table">
@@ -28,7 +28,7 @@ const ProductList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {renderProductList(props.products)}
+          {renderProductList(products, actions)}
         </tbody>
       </table>
     </div>
@@ -36,7 +36,8 @@ const ProductList = (props) => {
 };
 
 ProductList.propTypes = {
-  products: React.PropTypes.array
+  products: React.PropTypes.array.isRequired,
+  actions: React.PropTypes.object.isRequired
 };
 
 export default ProductList;
