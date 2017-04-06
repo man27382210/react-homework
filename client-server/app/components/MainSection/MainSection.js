@@ -34,7 +34,11 @@ const renderNotification = (hasError, error, clearErrorState) => {
 };
 
 const renderModals = (modalDisplay, findProductById, actions) => {
-  if (!modalDisplay.modal) return null;
+  if (!modalDisplay.modal) {
+    document.documentElement.className = '';
+    return null;
+  }
+  document.documentElement.className = 'is-clipped';
   const { modal, itemId } = modalDisplay;
   const { editProdcut, deleteProdcut, closeModal} = actions;
   const product = findProductById(itemId);
