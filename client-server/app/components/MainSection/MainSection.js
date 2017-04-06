@@ -10,14 +10,61 @@ import { MODAL } from '../../constants/ModalNames';
 
 const ESCAPE_KEY = 27;
 
+const renderNotification = (hasError, error, clearErrorState) => {
+  if (!hasError) return null;
+  return (
+    <div
+      className="notification is-danger has-text-centered"
+      style={{marginBottom: 0}}
+    >
+      <button className="delete" onClick={clearErrorState}></button>
+      <p>Oops! Something went wrong.</p>
+      <p><small>{error}</small></p>
+    </div>
+  );
+};
+
+const renderModals = (modalDisplay, findProductById, actions) => {
+  if (!modalDisplay.modal) return null;
+  const { modal, itemId } = modalDisplay;
+  const { editProdcut, deleteProdcut, closeModal} = actions;
+  const product = findProductById(itemId);
+  return (
+    <section>
+      <ImageModal
+        isShown={modal === MODAL.IMAGE_MODAL}
+        imageUrl={product.imageUrl}
+        closeModal={closeModal}
+      />
+      <EditModal
+        isShown={modal === MODAL.EDIT_MODAL}
+        product={product}
+        editProdcut={editProdcut}
+        closeModal={closeModal}
+      />
+      <ComfirmModal
+        isShown={modal === MODAL.COMFIRM_MODAL}
+        product={product}
+        deleteProdcut={deleteProdcut}
+        closeModal={closeModal}
+      />
+    </section>
+  );
+};
+
 class MainSection extends React.Component {
   constructor(props) {
     super(props);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.findProductById = this.findProductById.bind(this);
   }
 
   componentWillMount() {
     document.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentDidMount() {
+    this.props.actions.getProducts();
   }
 
   componentWillUnmount() {
@@ -35,7 +82,7 @@ class MainSection extends React.Component {
   }
 
   findProductById(id) {
-    const array = this.props.products.filter((product) => {
+    const array = this.props.products.data.filter((product) => {
       return product.id === id;
     });
     return array.length !== 0 ? array[0] : {};
@@ -43,8 +90,11 @@ class MainSection extends React.Component {
 
   render() {
     const { products, actions, modalDisplay } = this.props;
+    const { data, hasError, error } = products;
+    const { addProdcut, clearErrorState } = actions;
     return (
       <div>
+        {renderNotification(hasError, error, clearErrorState)}
         <section className="hero is-fullheight is-dark is-bold">
           <div className="hero-body">
             <div className="container">
@@ -55,9 +105,9 @@ class MainSection extends React.Component {
                   </h1>
                   <div className="box">
                     <ProductForm
-                      updateProdcut={actions.addProdcut}
+                      updateProdcut={addProdcut}
                     />
-                    {products.length > 0
+                    {(data && data.length > 0)
                       &&
                       <div>
                         <hr />
@@ -70,30 +120,14 @@ class MainSection extends React.Component {
             </div>
           </div>
         </section>
-        <ImageModal
-          isShown={modalDisplay.modal === MODAL.IMAGE_MODAL}
-          imageUrl={this.findProductById(modalDisplay.itemId).imageUrl}
-          closeModal={actions.closeModal}
-        />
-        <EditModal
-          isShown={modalDisplay.modal === MODAL.EDIT_MODAL}
-          product={this.findProductById(modalDisplay.itemId)}
-          editProdcut={actions.editProdcut}
-          closeModal={actions.closeModal}
-        />
-        <ComfirmModal
-          isShown={modalDisplay.modal === MODAL.COMFIRM_MODAL}
-          product={this.findProductById(modalDisplay.itemId)}
-          deleteProdcut={actions.deleteProdcut}
-          closeModal={actions.closeModal}
-        />
+        {renderModals(modalDisplay, this.findProductById, actions)}
       </div>
     );
   }
 }
 
 MainSection.propTypes = {
-  products: React.PropTypes.array.isRequired,
+  products: React.PropTypes.object.isRequired,
   actions: React.PropTypes.object.isRequired,
   modalDisplay: React.PropTypes.object.isRequired
 };

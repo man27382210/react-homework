@@ -28,7 +28,7 @@ const ProductList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {renderProductList(products, actions)}
+          {renderProductList(products.data, actions)}
         </tbody>
       </table>
     </div>
@@ -36,7 +36,7 @@ const ProductList = (props) => {
 };
 
 ProductList.propTypes = {
-  products: React.PropTypes.array.isRequired,
+  products: React.PropTypes.object.isRequired,
   actions: React.PropTypes.object.isRequired
 };
 

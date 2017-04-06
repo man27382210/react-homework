@@ -15,13 +15,11 @@ const EditModal = (props) => {
         <section className="modal-card-body">
           {Object.keys(product).length > 0
             &&
-            <div className="content">
-              <ProductForm
-                product={product}
-                updateProdcut={editProdcut}
-                closeModal={closeModal}
-              />
-            </div>
+            <ProductForm
+              product={product}
+              updateProdcut={editProdcut}
+              closeModal={closeModal}
+            />
           }
         </section>
       </div>
