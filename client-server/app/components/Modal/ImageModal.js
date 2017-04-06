@@ -1,4 +1,5 @@
 import React from 'react';
+import FadeInImage from '../Common/FadeInImage';
 
 const ImageModal = (props) => {
   const { isShown, imageUrl, closeModal } = props;
@@ -8,7 +9,7 @@ const ImageModal = (props) => {
       <div className="modal-background"></div>
       <div className="modal-content">
         <p className="image">
-          <img src={imageUrl ? imageUrl : 'http://bulma.io/images/placeholders/1280x960.png'} />
+          <FadeInImage src={imageUrl} />
         </p>
       </div>
       <button className="modal-close" onClick={closeModal}></button>

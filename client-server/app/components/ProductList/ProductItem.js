@@ -1,5 +1,6 @@
 import React from 'react';
 import numeral from 'numeral';
+import FadeInImage from '../Common/FadeInImage';
 import styles from './ProductItem.css';
 import { MODAL } from '../../constants/ModalNames';
 
@@ -11,7 +12,7 @@ const ProductItem = (props) => {
       <td>
         <figure className="image is-4by3">
           <a onClick={() => showModal(MODAL.IMAGE_MODAL, product.id)}>
-            <img src={product.imageUrl} />
+            <FadeInImage src={product.imageUrl} />
           </a>
         </figure>
       </td>
