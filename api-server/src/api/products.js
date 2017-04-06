@@ -22,7 +22,8 @@ export default ({ config, db }) => resource({
 
 	/** POST / - Create a new entity */
 	create({ body }, res) {
-		body.id = (products.length + 1).toString(36);
+		let lastElementId = parseInt(products[products.length - 1].id);
+		body.id = (lastElementId + 1).toString(36);
 		products.push(body);
 		res.json(body);
 	},
