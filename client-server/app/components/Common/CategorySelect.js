@@ -22,11 +22,13 @@ const renderOptions = (options) => (
   })
 );
 
-const CategorySelect = ({ value, onChange }) => (
+const CategorySelect = ({ className, value, onChange }) => (
   <select
+    className={className}
     value={value}
     onChange={onChange}
   >
+    <option value="">Select category</option>
     {renderOptions(OPTIONS)}
   </select>
 );
