@@ -10,6 +10,15 @@ import { MODAL } from '../../constants/ModalNames';
 
 const ESCAPE_KEY = 27;
 
+const renderLoader = (isFetching) => {
+  if (!isFetching) return null;
+  return (
+    <div className="loader-background">
+      <div className="loader">Loading...</div>
+    </div>
+  );
+};
+
 const renderNotification = (hasError, error, clearErrorState) => {
   if (!hasError) return null;
   return (
@@ -90,10 +99,11 @@ class MainSection extends React.Component {
 
   render() {
     const { products, actions, modalDisplay } = this.props;
-    const { data, hasError, error } = products;
+    const { data, isFetching, hasError, error } = products;
     const { addProdcut, clearErrorState } = actions;
     return (
       <div>
+        {renderLoader(isFetching)}
         {renderNotification(hasError, error, clearErrorState)}
         <section className="hero is-fullheight is-dark is-bold">
           <div className="hero-body">
