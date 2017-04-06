@@ -181,7 +181,7 @@ class ProductForm extends Component {
                 type="text"
                 value={imageUrl}
                 onChange={(e) => handleChange(FIELDS.image_url, e)}
-                placeholder="http://bulma.io/images/placeholders/64x64.png"
+                placeholder="http://bulma.io/images/placeholders/640x480.png"
               />
             </p>
             <p className="help is-danger">
