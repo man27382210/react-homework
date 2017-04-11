@@ -1,0 +1,19 @@
+[
+  {
+    "id": "1",
+    "name": "Audi R8",
+    "category": "Cars & Motorcycles",
+    "price": 12000.99,
+    "inStock": 3,
+    "status": "Publish",
+    "imageUrl": "http://media.caranddriver.com/images/media/331369/winning-audi-celebrates-racing-victories-with-limited-run-r8-v10-plus-photo-668142-s-450x274.jpg"
+  }, {
+    "id": "2",
+    "name": "Toyota 86",
+    "category": "Cars & Motorcycles",
+    "price": 8000,
+    "inStock": 5,
+    "status": "Draft",
+    "imageUrl": "http://s3.caradvice.com.au/thumb/1000/562/wp-content/uploads/2016/07/2017-Toyota-86-confirmed-7.jpg"
+  }
+]

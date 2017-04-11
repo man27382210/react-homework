@@ -11,3 +11,13 @@
   vertical-align: middle !important;
   text-align: center;
 }
+
+.Publish {
+  background-color: #23d160;
+  color: #fff;
+}
+
+.Draft {
+  background-color: #ffdd57;
+  color: rgba(0, 0, 0, 0.7);
+}
