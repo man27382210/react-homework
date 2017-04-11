@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import EditModal from './editModal.jsx';
 import { connect } from 'react-redux';
-import Constant from 'common/constant';
+import Constant from '../../common/constant';
 
 export class EditPage extends React.Component {
   constructor() {

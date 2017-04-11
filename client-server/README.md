@@ -1,5 +1,5 @@
 # Client Server
-> It's a to-do list example based on react, redux, react-router and webpack.
+> It's a isomorphic to-do list example based on react, redux, react-router and webpack.
 
 ## Basics
 ### Prerequisite
@@ -42,3 +42,7 @@ npm test
 ## Reference
 * [test-with-connected-components](https://github.com/reactjs/redux/blob/master/docs/recipes/WritingTests.md#connected-components)
 * [React Router Testing](https://github.com/ReactTraining/react-router/blob/57543eb41ce45b994a29792d77c86cc10b51eac9/docs/guides/testing.md)
+* [react-redux-isomorphic-example](https://github.com/coodoo/react-redux-isomorphic-example)
+: An isomorphic example built with react and redux , see readme for detailed instructions.
+* [Server Rendering in Redux](http://redux.js.org/docs/recipes/ServerRendering.html)
+* [Unexpected token < error in react router component](http://stackoverflow.com/questions/29718481/unexpected-token-error-in-react-router-component)

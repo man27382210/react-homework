@@ -12,16 +12,11 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
-    filename: '[name]-[hash].min.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'app/index.tpl.html',
-      inject: 'body',
-      filename: 'index.html'
-    }),
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -55,5 +50,11 @@ module.exports = {
   },
   postcss: [
     require('autoprefixer')
-  ]
+  ],
+  resolve: {
+    root: [
+      path.resolve('./app'),
+      path.resolve('./test'),
+    ],
+  }
 };
