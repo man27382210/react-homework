@@ -3,5 +3,6 @@
 	"bodyLimit": "100kb",
 	"corsHeaders": ["Link"],
 	"mongodbUrl": "mongodb://mongo:27017/products",
-	"seedDB": true
+	"seedDB": true,
+	"TEST_ENV": "test"
 }
