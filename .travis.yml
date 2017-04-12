@@ -12,9 +12,9 @@ branches:
     - /^feature\/step/
 
 install:
-  - cd ./api-server && npm install
-  - cd ./client-server && npm install
+  - sh npm_install api-server
+  - sh npm_install client-server
 
 script:
-  - cd ./api-server && npm test
-  - cd ./client-server && npm test
+  - sh test api-server
+  - sh test client-server
