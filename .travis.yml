@@ -2,6 +2,7 @@ language: node_js
 
 cache:
   directories:
+    - ./api-server/node_modules
     - ./client-server/node_modules
 
 node_js:
@@ -12,8 +13,9 @@ branches:
     - /^feature\/step/
 
 install:
-  - cd ./client-server
-  - npm install
+  - sh npm_install api-server
+  - sh npm_install client-server
 
 script:
-  - npm test
+  - sh test api-server
+  - sh test client-server

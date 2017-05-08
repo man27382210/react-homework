@@ -1,5 +1,9 @@
 version: '2'
 services:
+  mongo:
+    image: mongo:3.5
+    ports:
+      - "27017:27017"
   api:
     build: ./api-server
     volumes:
@@ -7,6 +11,8 @@ services:
       - /usr/src/api-server/node_modules
     ports:
       - "8080:8080"
+    links:
+      - mongo
   web:
     build: ./client-server
     volumes:

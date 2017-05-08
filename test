@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+  echo 'Need DIR_NAME'
+  echo 'test DIR_NAME'
+  exit 1
+fi
+
+# go into directory
+cd $1
+
+if [ "$2" == "-w" ]; then
+  # watch files for changes
+  npm run test-watch
+else
+  npm test
+fi
